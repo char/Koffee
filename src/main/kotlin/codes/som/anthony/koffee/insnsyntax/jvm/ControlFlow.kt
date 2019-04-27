@@ -28,6 +28,21 @@ val ASM._return: U get() = `return`
 val ASM.vreturn: U get() = `return`
 val ASM.return_void: U get() = `return`
 
+val ASM.lcmp: U get() {
+    node.instructions.add(InsnNode(LCMP))
+}
+val ASM.fcmpl: U get() {
+    node.instructions.add(InsnNode(FCMPL))
+}
+val ASM.fcmpg: U get() {
+    node.instructions.add(InsnNode(FCMPG))
+}
+val ASM.dcmpl: U get() {
+    node.instructions.add(InsnNode(DCMPL))
+}
+val ASM.dcmpg: U get() {
+    node.instructions.add(InsnNode(DCMPG))
+}
 fun ASM.ifeq(label: KoffeeLabel) {
     node.instructions.add(JumpInsnNode(IFEQ, label.labelNode))
 }

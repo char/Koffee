@@ -164,18 +164,3 @@ val ASM.i2c: U get() {
 val ASM.i2s: U get() {
     node.instructions.add(InsnNode(I2S))
 }
-val ASM.lcmp: U get() {
-    node.instructions.add(InsnNode(LCMP))
-}
-val ASM.fcmpl: U get() {
-    node.instructions.add(InsnNode(FCMPL))
-}
-val ASM.fcmpg: U get() {
-    node.instructions.add(InsnNode(FCMPG))
-}
-val ASM.dcmpl: U get() {
-    node.instructions.add(InsnNode(DCMPL))
-}
-val ASM.dcmpg: U get() {
-    node.instructions.add(InsnNode(DCMPG))
-}
