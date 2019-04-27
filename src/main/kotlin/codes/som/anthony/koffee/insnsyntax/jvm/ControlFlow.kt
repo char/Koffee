@@ -76,3 +76,6 @@ fun ASM.goto(label: KoffeeLabel) {
 fun ASM.jsr(label: KoffeeLabel) {
     node.instructions.add(JumpInsnNode(JSR, label.labelNode))
 }
+val ASM.ret: U get() {
+    node.instructions.add(InsnNode(RET))
+}
