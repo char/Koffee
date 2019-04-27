@@ -11,6 +11,7 @@ fun main() {
             getstatic(type(System::class), "out", type(PrintStream::class))
             ldc("Hello, world!")
             invokevirtual(type(PrintStream::class), void, "println", type(String::class))
+
             _return
         }
     }
