@@ -12,7 +12,7 @@ fun main() {
             ldc("Hello, world!")
             invokevirtual(type(PrintStream::class), void, "println", type(String::class))
 
-            _return
+            return_void
         }
     }
 

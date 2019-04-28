@@ -1,17 +1,8 @@
 package codes.som.anthony.kaffeinator
 
-import codes.som.anthony.koffee.assemble
-import codes.som.anthony.koffee.insnsyntax.jvm._return
-import codes.som.anthony.koffee.insnsyntax.jvm.getstatic
-import codes.som.anthony.koffee.insnsyntax.jvm.invokevirtual
-import codes.som.anthony.koffee.insnsyntax.jvm.ldc
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassReader.EXPAND_FRAMES
-import org.objectweb.asm.Type
 import org.objectweb.asm.tree.ClassNode
-import java.io.PrintStream
-import java.lang.StringBuilder
-
 
 fun disassemble(node: ClassNode) = buildString {
     append("name = ")
@@ -36,8 +27,10 @@ fun disassemble(node: ClassNode) = buildString {
     if (node.methods.isNotEmpty()) {
         append("\n")
         for (method in node.methods) {
-            append(disassembleMethod(method))
             append("\n")
+            append(disassembleMethod(method))
+            if (method.instructions.size() != 0)
+                append("\n")
         }
     }
 }

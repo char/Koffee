@@ -1,8 +1,10 @@
 package codes.som.anthony.kaffeinator
 
 import codes.som.anthony.kaffeinator.data.opcodeNameMap
+import org.objectweb.asm.Label
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.*
+import sun.text.normalizer.UTF16.append
 
 fun disassembleMethod(method: MethodNode) = buildString {
     val returnType = Type.getReturnType(method.desc)
@@ -18,10 +20,12 @@ fun disassembleMethod(method: MethodNode) = buildString {
         append(", ")
         append(parameterTypes.joinToString(", ", transform = ::disassembleType))
     }
-    if (method.signature != null || !method.exceptions.isNullOrEmpty()) {
-        append(", ")
+    if (method.signature != null) {
+        append(", signature = ")
         append(disassembleValue(method.signature))
-        append(", ")
+    }
+    if (!method.exceptions.isNullOrEmpty()) {
+        append(", exceptions = ")
         append(disassembleValue(method.exceptions.map(Type::getObjectType)))
     }
     append(")")
@@ -31,14 +35,27 @@ fun disassembleMethod(method: MethodNode) = buildString {
     } else {
         append(" {")
 
-        val indentation = " ".repeat(4)
+        val jumpTargetSet = mutableSetOf<LabelNode>()
         for (instruction in method.instructions) {
-            if (instruction.opcode == -1)
+            if (instruction is JumpInsnNode) {
+                jumpTargetSet.add(instruction.label)
+            }
+        }
+
+        val jumpTargets = jumpTargetSet
+                .sortedBy { method.instructions.indexOf(it) }
+                .map { it.label }
+
+        for (instruction in method.instructions) {
+            if (instruction.opcode == -1 && !(instruction is LabelNode && instruction in jumpTargetSet))
                 continue
 
             append("\n")
-            append(indentation)
-            append(disassembleInstruction(instruction))
+
+            if (instruction !is LabelNode) append("    ")
+            else append("\n    ")
+
+            append(disassembleInstruction(instruction, jumpTargets))
         }
         append("\n}")
     }
@@ -48,21 +65,28 @@ fun disassembleOpcode(opcode: Int): String {
     return opcodeNameMap[opcode] ?: "bytecode $opcode"
 }
 
-fun disassembleInstruction(insn: AbstractInsnNode): String {
+fun disassembleInstruction(insn: AbstractInsnNode, jumpTargets: List<Label>): String {
+    if (insn is LabelNode && insn.label in jumpTargets) {
+        val labelIndex = jumpTargets.indexOf(insn.label) + 1
+        return "+L[$labelIndex]"
+    }
+
+    val opcodeName = disassembleOpcode(insn.opcode)
+
     return when (insn) {
         is InsnNode -> {
-            return disassembleOpcode(insn.opcode)
+            return opcodeName
         }
 
         is VarInsnNode -> if (insn.`var` in 0 .. 3) {
-            "${disassembleOpcode(insn.opcode)}_${insn.`var`}"
+            "${opcodeName}_${insn.`var`}"
         } else {
-            "${disassembleOpcode(insn.opcode)}(${insn.`var`})"
+            "$opcodeName(${insn.`var`})"
         }
 
-        is LdcInsnNode -> "${disassembleOpcode(insn.opcode)}(${disassembleValue(insn.cst)})"
+        is LdcInsnNode -> "$opcodeName(${disassembleValue(insn.cst)})"
 
-        is FieldInsnNode -> "${disassembleOpcode(insn.opcode)}(" +
+        is FieldInsnNode -> "$opcodeName(" +
                 "${disassembleType(Type.getObjectType(insn.owner))}, " +
                 "${disassembleValue(insn.name)}, " +
                 "${disassembleType(Type.getType(insn.desc))})"
@@ -72,7 +96,7 @@ fun disassembleInstruction(insn: AbstractInsnNode): String {
             val parameterTypes = Type.getArgumentTypes(insn.desc)
 
             return buildString {
-                append(disassembleOpcode(insn.opcode))
+                append(opcodeName)
                 append("(")
                 append(disassembleType(Type.getObjectType(insn.owner)))
                 append(", ")
@@ -87,6 +111,24 @@ fun disassembleInstruction(insn: AbstractInsnNode): String {
             }
         }
 
-        else -> "<unsupported instruction>"
+        is JumpInsnNode -> {
+            val labelIndex = jumpTargets.indexOf(insn.label.label) + 1
+
+            return buildString {
+                append(opcodeName)
+                append("(L[")
+                append(labelIndex)
+                append("])")
+            }
+        }
+
+        is TypeInsnNode -> buildString {
+            append(opcodeName)
+            append("(")
+            append(disassembleType(Type.getObjectType(insn.desc)))
+            append(")")
+        }
+
+        else -> "<unsupported $opcodeName>"
     }
 }
