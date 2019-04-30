@@ -26,7 +26,7 @@ fun disassembleMethod(method: MethodNode) = buildString {
     }
     if (!method.exceptions.isNullOrEmpty()) {
         append(", exceptions = ")
-        append(disassembleValue(method.exceptions.map(Type::getObjectType)))
+        append(disassembleValue(method.exceptions.map(Type::getObjectType).toTypedArray()))
     }
     append(")")
 

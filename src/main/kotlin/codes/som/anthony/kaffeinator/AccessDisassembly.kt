@@ -5,7 +5,7 @@ import org.objectweb.asm.Opcodes.*
 fun disassembleAccess(access: Int): String {
     val accesses = mapOf(
             "public" to ACC_PUBLIC, "private" to ACC_PRIVATE, "protected" to ACC_PROTECTED,
-            "static" to ACC_STATIC, "final" to ACC_FINAL, "super" to ACC_SUPER,
+            "static" to ACC_STATIC, "final" to ACC_FINAL, "_super" to ACC_SUPER,
             "synchronized" to ACC_SYNCHRONIZED, "open" to ACC_OPEN, "transitive" to ACC_TRANSITIVE,
             "volatile" to ACC_VOLATILE, "bridge" to ACC_BRIDGE, "static_phase" to ACC_STATIC_PHASE,
             "varargs" to ACC_VARARGS, "transient" to ACC_TRANSIENT, "native" to ACC_NATIVE,

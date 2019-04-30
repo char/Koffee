@@ -100,3 +100,6 @@ fun ASM.jsr(label: KoffeeLabel) {
 val ASM.ret: U get() {
     node.instructions.add(InsnNode(RET))
 }
+val ASM.athrow: U get() {
+    node.instructions.add(InsnNode(ATHROW))
+}
