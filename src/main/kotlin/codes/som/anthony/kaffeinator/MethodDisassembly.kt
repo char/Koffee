@@ -129,6 +129,6 @@ fun disassembleInstruction(insn: AbstractInsnNode, jumpTargets: List<Label>): St
             append(")")
         }
 
-        else -> "<unsupported $opcodeName>"
+        else -> "// <unsupported $opcodeName>"
     }
 }

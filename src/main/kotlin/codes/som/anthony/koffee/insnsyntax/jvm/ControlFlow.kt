@@ -88,6 +88,12 @@ fun ASM.if_acmpne(label: KoffeeLabel) {
 fun ASM.goto(label: KoffeeLabel) {
     node.instructions.add(JumpInsnNode(GOTO, label.labelNode))
 }
+fun ASM.ifnull(label: KoffeeLabel) {
+    node.instructions.add(JumpInsnNode(IFNULL, label.labelNode))
+}
+fun ASM.ifnonnull(label: KoffeeLabel) {
+    node.instructions.add(JumpInsnNode(IFNONNULL, label.labelNode))
+}
 fun ASM.jsr(label: KoffeeLabel) {
     node.instructions.add(JumpInsnNode(JSR, label.labelNode))
 }

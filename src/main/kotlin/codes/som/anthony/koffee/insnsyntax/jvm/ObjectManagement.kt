@@ -14,3 +14,6 @@ fun ASM.anewarray(type: Type) {
 fun ASM.checkcast(type: Type) {
     node.instructions.add(TypeInsnNode(CHECKCAST, type.internalName))
 }
+fun ASM.instanceof(type: Type) {
+    node.instructions.add(TypeInsnNode(INSTANCEOF, type.internalName))
+}
