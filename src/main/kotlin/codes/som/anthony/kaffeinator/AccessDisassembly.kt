@@ -9,7 +9,7 @@ fun disassembleAccess(access: Int): String {
             "synchronized" to ACC_SYNCHRONIZED, "open" to ACC_OPEN, "transitive" to ACC_TRANSITIVE,
             "volatile" to ACC_VOLATILE, "bridge" to ACC_BRIDGE, "static_phase" to ACC_STATIC_PHASE,
             "varargs" to ACC_VARARGS, "transient" to ACC_TRANSIENT, "native" to ACC_NATIVE,
-            "interface" to ACC_INTERFACE, "abstract" to ACC_ABSTRACT, "strict" to ACC_STRICT,
+            "_interface" to ACC_INTERFACE, "abstract" to ACC_ABSTRACT, "strict" to ACC_STRICT,
             "synthetic" to ACC_SYNTHETIC, "annotation" to ACC_ANNOTATION, "enum" to ACC_ENUM,
             "mandated" to ACC_MANDATED, "module" to ACC_MODULE
     )
