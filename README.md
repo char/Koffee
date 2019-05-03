@@ -8,7 +8,7 @@ A Kotlin DSL for (dis)assembly of Java bytecode, using ObjectWeb ASM.
 val helloWorld: ClassNode = assemble {
     name = "com/example/HelloWorld"
 
-    method(public + static, void, "main", type(Array<String>::class)) {
+    method(public + static, "main", void, type(Array<String>::class)) {
         getstatic(type(System::class), "out", type(PrintStream::class))
         ldc("Hello, world!")
         invokevirtual(type(PrintStream::class), "println", void, type(String::class))

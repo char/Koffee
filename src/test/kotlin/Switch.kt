@@ -8,7 +8,7 @@ fun main() {
         name = "SwitchTest"
         access = public
 
-        method(public + static, void, "switchTest", int) {
+        method(public + static, "switchTest", void, int) {
             labelScope {
                 iload_0
                 lookupswitch(L["switch_default"], 1 to L["switch_1"], 2 to L["switch_2"], 100 to L["switch_100"])
@@ -45,7 +45,7 @@ fun main() {
             return_void
         }
 
-        method(public + static, void, "main", type(Array<String>::class)) {
+        method(public + static, "main", void, type(Array<String>::class)) {
             iconst_1
             invokestatic(thisType, "switchTest", void, int)
 

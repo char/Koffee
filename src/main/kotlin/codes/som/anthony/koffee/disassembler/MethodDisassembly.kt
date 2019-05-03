@@ -13,9 +13,9 @@ fun disassembleMethod(method: MethodNode) = buildString {
     append("method(")
     append(disassembleAccess(method.access))
     append(", ")
-    append(disassembleType(returnType))
-    append(", ")
     append(disassembleValue(method.name))
+    append(", ")
+    append(disassembleType(returnType))
     if (parameterTypes.isNotEmpty()) {
         append(", ")
         append(parameterTypes.joinToString(", ", transform = ::disassembleType))

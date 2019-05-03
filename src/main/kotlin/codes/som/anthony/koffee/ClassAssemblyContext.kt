@@ -31,8 +31,8 @@ class ClassAssemblyContext : TypesAccess, ModifiersAccess {
         node.fields.add(FieldNode(ASM7, access.access, name, type.descriptor, signature, value))
     }
 
-    fun method(access: Modifiers,
-               returnType: Type, name: String, vararg parameterTypes: Type,
+    fun method(access: Modifiers, name: String,
+               returnType: Type, vararg parameterTypes: Type,
                signature: String? = null, exceptions: Array<Type>? = null,
                routine: MethodAssemblyContext.() -> Unit) {
         val descriptor = Type.getMethodDescriptor(returnType, *parameterTypes)
