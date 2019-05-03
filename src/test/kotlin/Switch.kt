@@ -1,10 +1,10 @@
+import codes.som.anthony.kaffeinator.disassemble
 import codes.som.anthony.koffee.assemble
 import codes.som.anthony.koffee.insnsyntax.jvm.*
-import util.EphemeralClassLoader
 import java.io.PrintStream
 
 fun main() {
-    val classBuffer = assemble {
+    val switchTestNode = assemble {
         name = "SwitchTest"
         access = public
 
@@ -62,6 +62,8 @@ fun main() {
         }
     }
 
-    val switchTestClass = EphemeralClassLoader(classBuffer).loadClass("SwitchTest")
-    switchTestClass.getDeclaredMethod("main", Array<String>::class.java).invoke(null, emptyArray<String>())
+    // val switchTestClass = EphemeralClassLoader(classBuffer).loadClass("SwitchTest")
+    // switchTestClass.getDeclaredMethod("main", Array<String>::class.java).invoke(null, emptyArray<String>())
+
+    println(disassemble(switchTestNode))
 }

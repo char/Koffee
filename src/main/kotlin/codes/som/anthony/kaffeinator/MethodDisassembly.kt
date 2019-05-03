@@ -37,8 +37,20 @@ fun disassembleMethod(method: MethodNode) = buildString {
 
         val jumpTargetSet = mutableSetOf<LabelNode>()
         for (instruction in method.instructions) {
-            if (instruction is JumpInsnNode) {
-                jumpTargetSet.add(instruction.label)
+            when (instruction) {
+                is JumpInsnNode -> {
+                    jumpTargetSet.add(instruction.label)
+                }
+
+                is LookupSwitchInsnNode -> {
+                    jumpTargetSet.add(instruction.dflt)
+                    jumpTargetSet.addAll(instruction.labels)
+                }
+
+                is TableSwitchInsnNode -> {
+                    jumpTargetSet.add(instruction.dflt)
+                    jumpTargetSet.addAll(instruction.labels)
+                }
             }
         }
 
@@ -67,8 +79,7 @@ fun disassembleOpcode(opcode: Int): String {
 
 fun disassembleInstruction(insn: AbstractInsnNode, jumpTargets: List<Label>): String {
     if (insn is LabelNode && insn.label in jumpTargets) {
-        val labelIndex = jumpTargets.indexOf(insn.label) + 1
-        return "+L[$labelIndex]"
+        return "+${disassembleLabel(insn.label, jumpTargets)}"
     }
 
     val opcodeName = disassembleOpcode(insn.opcode)
@@ -111,16 +122,7 @@ fun disassembleInstruction(insn: AbstractInsnNode, jumpTargets: List<Label>): St
             }
         }
 
-        is JumpInsnNode -> {
-            val labelIndex = jumpTargets.indexOf(insn.label.label) + 1
-
-            return buildString {
-                append(opcodeName)
-                append("(L[")
-                append(labelIndex)
-                append("])")
-            }
-        }
+        is JumpInsnNode -> "$opcodeName(${disassembleLabel(insn.label.label, jumpTargets)})"
 
         is TypeInsnNode -> buildString {
             append(opcodeName)
@@ -129,6 +131,50 @@ fun disassembleInstruction(insn: AbstractInsnNode, jumpTargets: List<Label>): St
             append(")")
         }
 
+        is TableSwitchInsnNode -> buildString {
+            append(opcodeName)
+            append("(")
+            append(disassembleValue(insn.min))
+            append(", ")
+            append(disassembleValue(insn.max))
+            append(", ")
+            append(disassembleLabel(insn.dflt.label, jumpTargets))
+            append(", ")
+            for ((i, label) in insn.labels.withIndex()) {
+                append(disassembleLabel(label.label, jumpTargets))
+                if (i != insn.labels.lastIndex)
+                    append(", ")
+            }
+
+            append(")")
+        }
+
+        is LookupSwitchInsnNode -> buildString {
+            append(opcodeName)
+            append("(")
+            append(disassembleLabel(insn.dflt.label, jumpTargets))
+            append(", ")
+            for (i in insn.keys.indices) {
+                val key = insn.keys[i]
+                val label = insn.labels[i]
+
+                append(disassembleValue(key))
+                append(" to ")
+                append(disassembleLabel(label.label, jumpTargets))
+
+                if (i != insn.keys.lastIndex)
+                    append(", ")
+            }
+            append(")")
+        }
+
         else -> "// <unsupported $opcodeName>"
     }
+}
+
+private fun disassembleLabel(label: Label, jumpTargets: List<Label>) = buildString {
+    val labelIndex = jumpTargets.indexOf(label) + 1
+    append("L[")
+    append(labelIndex)
+    append("]")
 }

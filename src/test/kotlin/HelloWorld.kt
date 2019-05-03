@@ -15,7 +15,7 @@ fun main() {
 
             return_void
         }
-    }
+    }.let(::assemble)
 
     val helloWorldClass = EphemeralClassLoader(classBuffer).loadClass("HelloWorld")
     helloWorldClass.declaredMethods.first().invoke(null, emptyArray<String>())
