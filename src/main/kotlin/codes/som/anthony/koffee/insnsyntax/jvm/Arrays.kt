@@ -2,7 +2,10 @@ package codes.som.anthony.koffee.insnsyntax.jvm
 
 import codes.som.anthony.koffee.ASM
 import org.objectweb.asm.Opcodes.*
+import org.objectweb.asm.Type
 import org.objectweb.asm.tree.InsnNode
+import org.objectweb.asm.tree.MultiANewArrayInsnNode
+import org.objectweb.asm.tree.TypeInsnNode
 
 val ASM.iaload: U get() {
     node.instructions.add(InsnNode(IALOAD))
@@ -54,4 +57,10 @@ val ASM.sastore: U get() {
 }
 val ASM.arraylength: U get() {
     node.instructions.add(InsnNode(ARRAYLENGTH))
+}
+fun ASM.anewarray(type: Type) {
+    node.instructions.add(TypeInsnNode(ANEWARRAY, type.internalName))
+}
+fun ASM.multianewarray(type: Type, dimensions: Int) {
+    node.instructions.add(MultiANewArrayInsnNode(type.descriptor, dimensions))
 }
