@@ -168,6 +168,8 @@ fun disassembleInstruction(insn: AbstractInsnNode, jumpTargets: List<Label>): St
             append(")")
         }
 
+        is IntInsnNode -> "$opcodeName(${insn.operand})"
+
         else -> "// <unsupported $opcodeName>"
     }
 }
