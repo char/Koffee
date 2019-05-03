@@ -6,8 +6,8 @@ import org.objectweb.asm.tree.LookupSwitchInsnNode
 import org.objectweb.asm.tree.TableSwitchInsnNode
 
 fun ASM.tableswitch(min: Int, max: Int, defaultLabel: KoffeeLabel, vararg labels: KoffeeLabel) {
-    node.instructions.add(TableSwitchInsnNode(min, max,
-        defaultLabel.labelNode, *Array(labels.size, { labels[it].labelNode })))
+    val labelNodes = Array(labels.size, { labels[it].labelNode })
+    node.instructions.add(TableSwitchInsnNode(min, max, defaultLabel.labelNode, *labelNodes))
 }
 
 fun ASM.lookupswitch(defaultLabel: KoffeeLabel, vararg branches: Pair<Int, KoffeeLabel>) {
