@@ -27,3 +27,8 @@ Since we have to emit working Kotlin, there are a few limitations to the design:
 `` `super` `` or `_super` (`_super` is preferred)
 - Since 'return' is a globally reserved keyword in Kotlin, the instruction `return` can be referenced using
 `` `return` ``, `_return`, `return_void`, or `vreturn` (`return_void` is preferred)
+
+## Roadmap
+
+- Support try/catch blocks
+- Koffee as a CLI assembler/disassembler

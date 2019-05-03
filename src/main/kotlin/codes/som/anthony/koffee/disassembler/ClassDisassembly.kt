@@ -1,8 +1,9 @@
-package codes.som.anthony.kaffeinator
+package codes.som.anthony.koffee.disassembler
 
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassReader.EXPAND_FRAMES
 import org.objectweb.asm.tree.ClassNode
+import java.util.zip.ZipFile
 
 fun disassemble(node: ClassNode) = buildString {
     append("name = ")
@@ -33,25 +34,4 @@ fun disassemble(node: ClassNode) = buildString {
                 append("\n")
         }
     }
-}
-
-fun main() {
-    /* val buffer = assemble {
-        name = "HelloWorld"
-        access = public
-
-        field(public + static, type(String::class), "value")
-
-        method(public + static, void, "main", type(Array<String>::class)) {
-            getstatic(type(System::class), "out", type(PrintStream::class))
-            ldc("Hello, world!")
-            invokevirtual(type(PrintStream::class), void, "println", type(String::class))
-            _return
-        }
-    } */
-
-    val node = ClassNode()
-    ClassReader(java.lang.Object::class.java.getResourceAsStream("Object.class")).accept(node, EXPAND_FRAMES)
-
-    println(disassemble(node))
 }

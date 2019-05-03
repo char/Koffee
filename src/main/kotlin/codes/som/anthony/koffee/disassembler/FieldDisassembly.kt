@@ -1,4 +1,4 @@
-package codes.som.anthony.kaffeinator
+package codes.som.anthony.koffee.disassembler
 
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.FieldNode

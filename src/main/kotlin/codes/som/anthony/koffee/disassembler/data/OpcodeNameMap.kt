@@ -1,4 +1,4 @@
-package codes.som.anthony.kaffeinator.data
+package codes.som.anthony.koffee.disassembler.data
 
 import org.objectweb.asm.Opcodes.*
 

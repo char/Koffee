@@ -1,4 +1,4 @@
-import codes.som.anthony.kaffeinator.disassemble
+import codes.som.anthony.koffee.disassembler.disassemble
 import codes.som.anthony.koffee.assemble
 import codes.som.anthony.koffee.insnsyntax.jvm.*
 import java.io.PrintStream

@@ -1,6 +1,6 @@
-package codes.som.anthony.kaffeinator
+package codes.som.anthony.koffee.disassembler
 
-import codes.som.anthony.kaffeinator.data.opcodeNameMap
+import codes.som.anthony.koffee.disassembler.data.opcodeNameMap
 import org.objectweb.asm.Label
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.*
