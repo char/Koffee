@@ -97,8 +97,8 @@ fun ASM.ifnonnull(label: KoffeeLabel) {
 fun ASM.jsr(label: KoffeeLabel) {
     node.instructions.add(JumpInsnNode(JSR, label.labelNode))
 }
-val ASM.ret: U get() {
-    node.instructions.add(InsnNode(RET))
+fun ASM.ret(slot: Int) {
+    node.instructions.add(VarInsnNode(RET, slot))
 }
 val ASM.athrow: U get() {
     node.instructions.add(InsnNode(ATHROW))
