@@ -39,7 +39,7 @@ fun main() {
 
                 getstatic(type(System::class), "out", type(PrintStream::class))
                 aload_1
-                invokevirtual(type(PrintStream::class), void, "println", type(String::class))
+                invokevirtual(type(PrintStream::class), "println", void, type(String::class))
             }
 
             return_void
@@ -47,16 +47,16 @@ fun main() {
 
         method(public + static, void, "main", type(Array<String>::class)) {
             iconst_1
-            invokestatic(thisType, void, "switchTest", int)
+            invokestatic(thisType, "switchTest", void, int)
 
             iconst_2
-            invokestatic(thisType, void, "switchTest", int)
+            invokestatic(thisType, "switchTest", void, int)
 
             iconst_m1
-            invokestatic(thisType, void, "switchTest", int)
+            invokestatic(thisType, "switchTest", void, int)
 
             bipush(100)
-            invokestatic(thisType, void, "switchTest", int)
+            invokestatic(thisType, "switchTest", void, int)
 
             return_void
         }

@@ -5,6 +5,7 @@ import codes.som.anthony.koffee.KoffeeLabel
 import org.objectweb.asm.Opcodes.*
 import org.objectweb.asm.tree.InsnNode
 import org.objectweb.asm.tree.JumpInsnNode
+import org.objectweb.asm.tree.VarInsnNode
 
 val ASM.ireturn: U get() {
     node.instructions.add(InsnNode(IRETURN))

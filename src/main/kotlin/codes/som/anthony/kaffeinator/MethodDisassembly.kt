@@ -111,12 +111,12 @@ fun disassembleInstruction(insn: AbstractInsnNode, jumpTargets: List<Label>): St
                 append("(")
                 append(disassembleType(Type.getObjectType(insn.owner)))
                 append(", ")
-                append(disassembleType(returnType))
-                append(", ")
                 append(disassembleValue(insn.name))
-                if (parameterTypes.isNotEmpty()) {
+                append(", ")
+                append(disassembleType(returnType))
+                for (parameterType in parameterTypes) {
                     append(", ")
-                    append(parameterTypes.joinToString(", ", transform = ::disassembleType))
+                    append(disassembleType(parameterType))
                 }
                 append(")")
             }

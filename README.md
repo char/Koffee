@@ -11,7 +11,7 @@ val helloWorld: ClassNode = assemble {
     method(public + static, void, "main", type(Array<String>::class)) {
         getstatic(type(System::class), "out", type(PrintStream::class))
         ldc("Hello, world!")
-        invokevirtual(type(PrintStream::class), void, "println", type(String::class))
+        invokevirtual(type(PrintStream::class), "println", void, type(String::class))
         return_void
     }
 }
