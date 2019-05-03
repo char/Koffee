@@ -1,5 +1,6 @@
 import codes.som.anthony.koffee.assemble
 import codes.som.anthony.koffee.insnsyntax.jvm.*
+import util.EphemeralClassLoader
 import java.io.PrintStream
 
 fun main() {
@@ -16,12 +17,6 @@ fun main() {
         }
     }
 
-    class EphemeralClassLoader : ClassLoader() {
-        override fun findClass(name: String): Class<*> {
-            return defineClass(name, classBuffer, 0, classBuffer.size)
-        }
-    }
-
-    val helloWorldClass = EphemeralClassLoader().loadClass("HelloWorld")
+    val helloWorldClass = EphemeralClassLoader(classBuffer).loadClass("HelloWorld")
     helloWorldClass.declaredMethods.first().invoke(null, emptyArray<String>())
 }
