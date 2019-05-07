@@ -1,5 +1,5 @@
-import codes.som.anthony.koffee.disassembler.disassemble
 import codes.som.anthony.koffee.assemble
+import codes.som.anthony.koffee.disassembler.disassembleClass
 import codes.som.anthony.koffee.insnsyntax.jvm.*
 import java.io.PrintStream
 
@@ -9,7 +9,7 @@ fun main() {
         access = public
 
         method(public + static, "switchTest", void, int) {
-            labelScope {
+            scope {
                 iload_0
                 lookupswitch(L["switch_default"], 1 to L["switch_1"], 2 to L["switch_2"], 100 to L["switch_100"])
 
@@ -47,16 +47,16 @@ fun main() {
 
         method(public + static, "main", void, type(Array<String>::class)) {
             iconst_1
-            invokestatic(thisType, "switchTest", void, int)
+            invokestatic(self, "switchTest", void, int)
 
             iconst_2
-            invokestatic(thisType, "switchTest", void, int)
+            invokestatic(self, "switchTest", void, int)
 
             iconst_m1
-            invokestatic(thisType, "switchTest", void, int)
+            invokestatic(self, "switchTest", void, int)
 
             bipush(100)
-            invokestatic(thisType, "switchTest", void, int)
+            invokestatic(self, "switchTest", void, int)
 
             return_void
         }
@@ -65,5 +65,5 @@ fun main() {
     // val switchTestClass = EphemeralClassLoader(classBuffer).loadClass("SwitchTest")
     // switchTestClass.getDeclaredMethod("main", Array<String>::class.java).invoke(null, emptyArray<String>())
 
-    println(disassemble(switchTestNode))
+    println(disassembleClass(switchTestNode))
 }

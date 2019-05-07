@@ -25,7 +25,7 @@ class ClassAssemblyContext : TypesAccess, ModifiersAccess {
         get() = node.version
         set(value) { node.version = value }
 
-    val thisType get() = type(name)
+    val self get() = type(name)
 
     fun field(access: Modifiers, type: Type, name: String, signature: String? = null, value: Any? = null) {
         node.fields.add(FieldNode(ASM7, access.access, name, type.descriptor, signature, value))

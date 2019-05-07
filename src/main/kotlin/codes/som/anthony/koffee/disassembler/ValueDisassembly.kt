@@ -1,51 +1,50 @@
 package codes.som.anthony.koffee.disassembler
 
+import codes.som.anthony.koffee.disassembler.util.DisassemblyContext
+import codes.som.anthony.koffee.disassembler.data.accessFlagNameMap
 import org.objectweb.asm.Type
 import org.objectweb.asm.Type.*
 
-fun disassembleValue(value: Any?): String {
-    if (value is Type) {
-        return disassembleType(value)
-    }
+fun disassembleValue(value: Any?, context: DisassemblyContext): String {
+    return when (value) {
+        null -> "null"
 
-    if (value is List<*>) {
-        return buildString {
+        is List<*> -> buildString {
             append("listOf(")
-            append(value.joinToString(", ", transform = ::disassembleValue))
+            for ((index, listValue) in value.withIndex()) {
+                append(disassembleValue(listValue, context))
+                if (index != value.lastIndex)
+                    append(", ")
+            }
             append(")")
         }
-    }
 
-    if (value is Array<*>) {
-        return buildString {
+        is Array<*> -> buildString {
             append("arrayOf(")
-            value.joinToString(", ", transform = ::disassembleValue)
+            for ((index, arrayValue) in value.withIndex()) {
+                append(disassembleValue(arrayValue, context))
+                if (index != value.lastIndex)
+                    append(", ")
+            }
             append(")")
         }
-    }
 
-    if (value == null) {
-        return "null"
-    }
+        is String -> "\"$value\""
+        is Float -> "${value}F"
+        is Number -> "$value"
 
-    if (value is String) {
-        return "\"$value\""
-    }
+        is Type -> disassembleType(value, context)
 
-    if (value is Float) {
-        return "${value}F"
+        else -> error("Unknown value type for disassembly")
     }
-
-    return "$value"
 }
 
-fun disassembleType(type: Type): String {
+fun disassembleType(type: Type, context: DisassemblyContext): String {
     if (type.sort == OBJECT || type.sort == ARRAY) {
-        return buildString {
-            append("type(")
-            append(disassembleValue(type.internalName))
-            append(")")
-        }
+        if (type.internalName == context.currentType)
+            return "self"
+
+        return "type(${disassembleValue(type.internalName, context)})"
     }
 
     return when (type) {
@@ -61,4 +60,10 @@ fun disassembleType(type: Type): String {
 
         else -> error("Unknown primitive")
     }
+}
+
+fun disassembleAccess(access: Int): String {
+    return accessFlagNameMap.filter { (_, modifier) -> access and modifier != 0 }
+            .map { (name, _) -> name }
+            .joinToString(" + ")
 }

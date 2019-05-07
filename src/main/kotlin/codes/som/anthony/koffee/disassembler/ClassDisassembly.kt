@@ -1,37 +1,42 @@
 package codes.som.anthony.koffee.disassembler
 
-import org.objectweb.asm.ClassReader
-import org.objectweb.asm.ClassReader.EXPAND_FRAMES
+import codes.som.anthony.koffee.disassembler.util.DisassemblyContext
+import codes.som.anthony.koffee.disassembler.util.SourceCodeGenerator
 import org.objectweb.asm.tree.ClassNode
-import java.util.zip.ZipFile
 
-fun disassemble(node: ClassNode) = buildString {
-    append("name = ")
-    append(disassembleValue(node.name))
-    val classAccessSpecifier = disassembleAccess(node.access)
-    if (classAccessSpecifier.isNotEmpty()) {
-        append("\naccess = ")
-        append(classAccessSpecifier)
-    }
-    append("\nversion = ")
-    append(node.version)
-    append("\n")
-
-    if (node.fields.isNotEmpty()) {
+private fun classPrologue(codegen: SourceCodeGenerator) {
+    with (codegen) {
+        appendLine("import codes.som.anthony.koffee.assemble")
+        appendLine("import codes.som.anthony.koffee.insnsyntax.jvm.*")
         append("\n")
-        for (field in node.fields) {
-            append(disassembleField(field))
-            append("\n")
-        }
+
+        appendLine("assemble {")
+        indent()
+    }
+}
+
+private fun classEpilogue(codegen: SourceCodeGenerator) {
+    with (codegen) {
+        dedent()
+        appendLine("}")
+    }
+}
+
+fun disassembleClass(node: ClassNode): String {
+    val codegen = SourceCodeGenerator()
+    val context = DisassemblyContext(node.name)
+
+    with (codegen) {
+        classPrologue(codegen)
+        appendLine("name = ${disassembleValue(node.name, context)}")
+        appendLine("access = ${disassembleAccess(node.access)}")
+        appendLine("version = ${disassembleValue(node.version, context)}")
+
+        disassembleFields(node, codegen, context)
+        disassembleMethods(node, codegen, context)
+
+        classEpilogue(codegen)
     }
 
-    if (node.methods.isNotEmpty()) {
-        append("\n")
-        for (method in node.methods) {
-            append("\n")
-            append(disassembleMethod(method))
-            if (method.instructions.size() != 0)
-                append("\n")
-        }
-    }
+    return codegen.toString()
 }
