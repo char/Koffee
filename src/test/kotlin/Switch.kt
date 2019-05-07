@@ -1,5 +1,5 @@
 import codes.som.anthony.koffee.assemble
-import codes.som.anthony.koffee.disassembler.disassembleClass
+import codes.som.anthony.koffee.disassembler.disassemble
 import codes.som.anthony.koffee.insnsyntax.jvm.*
 import java.io.PrintStream
 
@@ -65,5 +65,5 @@ fun main() {
     // val switchTestClass = EphemeralClassLoader(classBuffer).loadClass("SwitchTest")
     // switchTestClass.getDeclaredMethod("main", Array<String>::class.java).invoke(null, emptyArray<String>())
 
-    println(disassembleClass(switchTestNode))
+    println(disassemble(switchTestNode))
 }

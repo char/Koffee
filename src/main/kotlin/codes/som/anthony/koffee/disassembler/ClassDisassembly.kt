@@ -22,7 +22,7 @@ private fun classEpilogue(codegen: SourceCodeGenerator) {
     }
 }
 
-fun disassembleClass(node: ClassNode): String {
+fun disassemble(node: ClassNode): String {
     val codegen = SourceCodeGenerator()
     val context = DisassemblyContext(node.name)
 
