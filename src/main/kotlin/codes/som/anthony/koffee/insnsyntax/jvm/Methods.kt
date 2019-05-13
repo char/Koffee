@@ -7,20 +7,17 @@ import org.objectweb.asm.tree.MethodInsnNode
 
 fun ASM.invokevirtual(owner: Type, name: String, returnType: Type, vararg parameterTypes: Type) {
     val descriptor = Type.getMethodDescriptor(returnType, *parameterTypes)
-    node.instructions.add(MethodInsnNode(INVOKEVIRTUAL, owner.internalName, name, descriptor))
+    instructions.add(MethodInsnNode(INVOKEVIRTUAL, owner.internalName, name, descriptor))
 }
-
 fun ASM.invokespecial(owner: Type, name: String, returnType: Type, vararg parameterTypes: Type) {
     val descriptor = Type.getMethodDescriptor(returnType, *parameterTypes)
-    node.instructions.add(MethodInsnNode(INVOKESPECIAL, owner.internalName, name, descriptor))
+    instructions.add(MethodInsnNode(INVOKESPECIAL, owner.internalName, name, descriptor))
 }
-
 fun ASM.invokestatic(owner: Type, name: String, returnType: Type, vararg parameterTypes: Type) {
     val descriptor = Type.getMethodDescriptor(returnType, *parameterTypes)
-    node.instructions.add(MethodInsnNode(INVOKESTATIC, owner.internalName, name, descriptor))
+    instructions.add(MethodInsnNode(INVOKESTATIC, owner.internalName, name, descriptor))
 }
-
 fun ASM.invokeinterface(owner: Type, name: String, returnType: Type, vararg parameterTypes: Type) {
     val descriptor = Type.getMethodDescriptor(returnType, *parameterTypes)
-    node.instructions.add(MethodInsnNode(INVOKEINTERFACE, owner.internalName, name, descriptor))
+    instructions.add(MethodInsnNode(INVOKEINTERFACE, owner.internalName, name, descriptor))
 }

@@ -7,73 +7,56 @@ import org.objectweb.asm.tree.IntInsnNode
 import org.objectweb.asm.tree.LdcInsnNode
 
 val ASM.aconst_null: U get() {
-    node.instructions.add(InsnNode(ACONST_NULL))
+    instructions.add(InsnNode(ACONST_NULL))
 }
-
 val ASM.iconst_m1: U get() {
-    node.instructions.add(InsnNode(ICONST_M1))
+    instructions.add(InsnNode(ICONST_M1))
 }
-
 val ASM.iconst_0: U get() {
-    node.instructions.add(InsnNode(ICONST_0))
+    instructions.add(InsnNode(ICONST_0))
 }
-
 val ASM.iconst_1: U get() {
-    node.instructions.add(InsnNode(ICONST_1))
+    instructions.add(InsnNode(ICONST_1))
 }
-
 val ASM.iconst_2: U get() {
-    node.instructions.add(InsnNode(ICONST_2))
+    instructions.add(InsnNode(ICONST_2))
 }
-
 val ASM.iconst_3: U get() {
-    node.instructions.add(InsnNode(ICONST_3))
+    instructions.add(InsnNode(ICONST_3))
 }
-
 val ASM.iconst_4: U get() {
-    node.instructions.add(InsnNode(ICONST_4))
+    instructions.add(InsnNode(ICONST_4))
 }
-
 val ASM.iconst_5: U get() {
-    node.instructions.add(InsnNode(ICONST_5))
+    instructions.add(InsnNode(ICONST_5))
 }
-
 val ASM.lconst_0: U get() {
-    node.instructions.add(InsnNode(LCONST_0))
+    instructions.add(InsnNode(LCONST_0))
 }
-
 val ASM.lconst_1: U get() {
-    node.instructions.add(InsnNode(LCONST_1))
+    instructions.add(InsnNode(LCONST_1))
 }
-
 val ASM.fconst_0: U get() {
-    node.instructions.add(InsnNode(FCONST_0))
+    instructions.add(InsnNode(FCONST_0))
 }
-
 val ASM.fconst_1: U get() {
-    node.instructions.add(InsnNode(FCONST_1))
+    instructions.add(InsnNode(FCONST_1))
 }
-
 val ASM.fconst_2: U get() {
-    node.instructions.add(InsnNode(FCONST_2))
+    instructions.add(InsnNode(FCONST_2))
 }
-
 val ASM.dconst_0: U get() {
-    node.instructions.add(InsnNode(DCONST_0))
+    instructions.add(InsnNode(DCONST_0))
 }
-
 val ASM.dconst_1: U get() {
-    node.instructions.add(InsnNode(DCONST_1))
+    instructions.add(InsnNode(DCONST_1))
 }
-
 fun ASM.bipush(v: Int) {
-    node.instructions.add(IntInsnNode(BIPUSH, v))
+    instructions.add(IntInsnNode(BIPUSH, v))
 }
-
 fun ASM.sipush(v: Int) {
-    node.instructions.add(IntInsnNode(SIPUSH, v))
+    instructions.add(IntInsnNode(SIPUSH, v))
 }
-
 fun ASM.ldc(v: Any) {
-    node.instructions.add(LdcInsnNode(v))
+    instructions.add(LdcInsnNode(v))
 }

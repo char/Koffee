@@ -8,99 +8,99 @@ import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.VarInsnNode
 
 val ASM.ireturn: U get() {
-    node.instructions.add(InsnNode(IRETURN))
+    instructions.add(InsnNode(IRETURN))
 }
 val ASM.lreturn: U get() {
-    node.instructions.add(InsnNode(LRETURN))
+    instructions.add(InsnNode(LRETURN))
 }
 val ASM.freturn: U get() {
-    node.instructions.add(InsnNode(FRETURN))
+    instructions.add(InsnNode(FRETURN))
 }
 val ASM.dreturn: U get() {
-    node.instructions.add(InsnNode(DRETURN))
+    instructions.add(InsnNode(DRETURN))
 }
 val ASM.areturn: U get() {
-    node.instructions.add(InsnNode(ARETURN))
+    instructions.add(InsnNode(ARETURN))
 }
 val ASM.`return`: U get() {
-    node.instructions.add(InsnNode(RETURN))
+    instructions.add(InsnNode(RETURN))
 }
 val ASM._return: U get() = `return`
 val ASM.vreturn: U get() = `return`
 val ASM.return_void: U get() = `return`
 
 val ASM.lcmp: U get() {
-    node.instructions.add(InsnNode(LCMP))
+    instructions.add(InsnNode(LCMP))
 }
 val ASM.fcmpl: U get() {
-    node.instructions.add(InsnNode(FCMPL))
+    instructions.add(InsnNode(FCMPL))
 }
 val ASM.fcmpg: U get() {
-    node.instructions.add(InsnNode(FCMPG))
+    instructions.add(InsnNode(FCMPG))
 }
 val ASM.dcmpl: U get() {
-    node.instructions.add(InsnNode(DCMPL))
+    instructions.add(InsnNode(DCMPL))
 }
 val ASM.dcmpg: U get() {
-    node.instructions.add(InsnNode(DCMPG))
+    instructions.add(InsnNode(DCMPG))
 }
 fun ASM.ifeq(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IFEQ, label.labelNode))
+    instructions.add(JumpInsnNode(IFEQ, label.labelNode))
 }
 fun ASM.ifne(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IFNE, label.labelNode))
+    instructions.add(JumpInsnNode(IFNE, label.labelNode))
 }
 fun ASM.iflt(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IFLT, label.labelNode))
+    instructions.add(JumpInsnNode(IFLT, label.labelNode))
 }
 fun ASM.ifge(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IFGE, label.labelNode))
+    instructions.add(JumpInsnNode(IFGE, label.labelNode))
 }
 fun ASM.ifgt(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IFGT, label.labelNode))
+    instructions.add(JumpInsnNode(IFGT, label.labelNode))
 }
 fun ASM.ifle(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IFLE, label.labelNode))
+    instructions.add(JumpInsnNode(IFLE, label.labelNode))
 }
 fun ASM.if_icmpeq(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IF_ICMPEQ, label.labelNode))
+    instructions.add(JumpInsnNode(IF_ICMPEQ, label.labelNode))
 }
 fun ASM.if_icmpne(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IF_ICMPNE, label.labelNode))
+    instructions.add(JumpInsnNode(IF_ICMPNE, label.labelNode))
 }
 fun ASM.if_icmplt(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IF_ICMPLT, label.labelNode))
+    instructions.add(JumpInsnNode(IF_ICMPLT, label.labelNode))
 }
 fun ASM.if_icmpge(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IF_ICMPGE, label.labelNode))
+    instructions.add(JumpInsnNode(IF_ICMPGE, label.labelNode))
 }
 fun ASM.if_icmpgt(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IF_ICMPGT, label.labelNode))
+    instructions.add(JumpInsnNode(IF_ICMPGT, label.labelNode))
 }
 fun ASM.if_icmple(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IF_ICMPLE, label.labelNode))
+    instructions.add(JumpInsnNode(IF_ICMPLE, label.labelNode))
 }
 fun ASM.if_acmpeq(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IF_ACMPEQ, label.labelNode))
+    instructions.add(JumpInsnNode(IF_ACMPEQ, label.labelNode))
 }
 fun ASM.if_acmpne(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IF_ACMPNE, label.labelNode))
+    instructions.add(JumpInsnNode(IF_ACMPNE, label.labelNode))
 }
 fun ASM.goto(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(GOTO, label.labelNode))
+    instructions.add(JumpInsnNode(GOTO, label.labelNode))
 }
 fun ASM.ifnull(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IFNULL, label.labelNode))
+    instructions.add(JumpInsnNode(IFNULL, label.labelNode))
 }
 fun ASM.ifnonnull(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(IFNONNULL, label.labelNode))
+    instructions.add(JumpInsnNode(IFNONNULL, label.labelNode))
 }
 fun ASM.jsr(label: KoffeeLabel) {
-    node.instructions.add(JumpInsnNode(JSR, label.labelNode))
+    instructions.add(JumpInsnNode(JSR, label.labelNode))
 }
 fun ASM.ret(slot: Int) {
-    node.instructions.add(VarInsnNode(RET, slot))
+    instructions.add(VarInsnNode(RET, slot))
 }
 val ASM.athrow: U get() {
-    node.instructions.add(InsnNode(ATHROW))
+    instructions.add(InsnNode(ATHROW))
 }

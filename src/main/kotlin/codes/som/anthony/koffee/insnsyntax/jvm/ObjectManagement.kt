@@ -6,11 +6,11 @@ import org.objectweb.asm.Type
 import org.objectweb.asm.tree.TypeInsnNode
 
 fun ASM.new(type: Type) {
-    node.instructions.add(TypeInsnNode(NEW, type.internalName))
+    instructions.add(TypeInsnNode(NEW, type.internalName))
 }
 fun ASM.checkcast(type: Type) {
-    node.instructions.add(TypeInsnNode(CHECKCAST, type.internalName))
+    instructions.add(TypeInsnNode(CHECKCAST, type.internalName))
 }
 fun ASM.instanceof(type: Type) {
-    node.instructions.add(TypeInsnNode(INSTANCEOF, type.internalName))
+    instructions.add(TypeInsnNode(INSTANCEOF, type.internalName))
 }

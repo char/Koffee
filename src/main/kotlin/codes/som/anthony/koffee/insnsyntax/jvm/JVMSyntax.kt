@@ -7,5 +7,5 @@ import org.objectweb.asm.tree.InsnNode
 typealias U = Unit
 
 val ASM.nop: U get() {
-    node.instructions.add(InsnNode(NOP))
+    instructions.add(InsnNode(NOP))
 }
