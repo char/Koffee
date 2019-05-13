@@ -4,7 +4,7 @@ import codes.som.anthony.koffee.ASM
 import org.objectweb.asm.Opcodes.NOP
 import org.objectweb.asm.tree.InsnNode
 
-typealias U = Unit
+internal typealias U = Unit
 
 val ASM.nop: U get() {
     instructions.add(InsnNode(NOP))
