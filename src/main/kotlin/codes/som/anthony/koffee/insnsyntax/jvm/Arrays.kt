@@ -4,6 +4,7 @@ import codes.som.anthony.koffee.ASM
 import org.objectweb.asm.Opcodes.*
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.InsnNode
+import org.objectweb.asm.tree.IntInsnNode
 import org.objectweb.asm.tree.MultiANewArrayInsnNode
 import org.objectweb.asm.tree.TypeInsnNode
 
@@ -57,6 +58,9 @@ val ASM.sastore: U get() {
 }
 val ASM.arraylength: U get() {
     instructions.add(InsnNode(ARRAYLENGTH))
+}
+fun ASM.newarray(type: Type) {
+    instructions.add(IntInsnNode(NEWARRAY, type.sort))
 }
 fun ASM.anewarray(type: Type) {
     instructions.add(TypeInsnNode(ANEWARRAY, type.internalName))
