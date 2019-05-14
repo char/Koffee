@@ -25,6 +25,13 @@ class ClassAssemblyContext : TypesAccess, ModifiersAccess {
         get() = node.version
         set(value) { node.version = value }
 
+    var superClass: Type
+        get() = type(node.superName)
+        set(value) { node.superName = value.internalName }
+
+    val interfaces: MutableList<String>
+        get() = node.interfaces
+
     val self get() = type(name)
 
     fun field(access: Modifiers, type: Type, name: String, signature: String? = null, value: Any? = null) {

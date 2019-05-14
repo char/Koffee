@@ -28,13 +28,13 @@ fun main() {
                 invokevirtual(type(Object::class), "toString", type(String::class))
                 invokevirtual(type(PrintStream::class), "println", void, type(String::class))
             }.handle(type(NullPointerException::class)) {
-                invokevirtual(type(Exception::class), "printStackTrace", void)
+                invokevirtual(type(Throwable::class), "printStackTrace", void)
             }.handle(type(Exception::class)) {
-                pop
-
                 getstatic(type(System::class), "err", type(PrintStream::class))
                 ldc("Caught an unexpected Exception")
                 invokevirtual(type(PrintStream::class), "println", void, type(String::class))
+
+                invokevirtual(type(Throwable::class), "printStackTrace", void)
             }
 
             return_void
