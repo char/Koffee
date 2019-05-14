@@ -15,11 +15,26 @@ fun main() {
                 invokespecial(type(RuntimeException::class), "<init>", void)
                 athrow
             }.handle(type(RuntimeException::class)) {
-                getstatic(type(System::class), "out", type(PrintStream::class))
-                ldc("Caught an exception!")
-                invokevirtual(type(PrintStream::class), "println", void, type(String::class))
+                pop
 
+                getstatic(type(System::class), "out", type(PrintStream::class))
+                ldc("Caught an expected RuntimeException")
+                invokevirtual(type(PrintStream::class), "println", void, type(String::class))
+            }
+
+            guard {
+                getstatic(type(System::class), "out", type(PrintStream::class))
+                aconst_null
+                invokevirtual(type(Object::class), "toString", type(String::class))
+                invokevirtual(type(PrintStream::class), "println", void, type(String::class))
+            }.handle(type(NullPointerException::class)) {
                 invokevirtual(type(Exception::class), "printStackTrace", void)
+            }.handle(type(Exception::class)) {
+                pop
+
+                getstatic(type(System::class), "err", type(PrintStream::class))
+                ldc("Caught an unexpected Exception")
+                invokevirtual(type(PrintStream::class), "println", void, type(String::class))
             }
 
             return_void

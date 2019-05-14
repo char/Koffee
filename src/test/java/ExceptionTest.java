@@ -4,6 +4,8 @@ public class ExceptionTest {
             throw new RuntimeException();
         } catch (RuntimeException e) {
             e.printStackTrace();
+        } catch (StackOverflowError e) {
+            System.out.println("Hello, world!");
         }
     }
 }
