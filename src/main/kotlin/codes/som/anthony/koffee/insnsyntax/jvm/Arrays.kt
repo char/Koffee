@@ -3,6 +3,7 @@ package codes.som.anthony.koffee.insnsyntax.jvm
 import codes.som.anthony.koffee.ASM
 import org.objectweb.asm.Opcodes.*
 import org.objectweb.asm.Type
+import org.objectweb.asm.Type.*
 import org.objectweb.asm.tree.InsnNode
 import org.objectweb.asm.tree.IntInsnNode
 import org.objectweb.asm.tree.MultiANewArrayInsnNode
@@ -60,7 +61,19 @@ val ASM.arraylength: U get() {
     instructions.add(InsnNode(ARRAYLENGTH))
 }
 fun ASM.newarray(type: Type) {
-    instructions.add(IntInsnNode(NEWARRAY, type.sort))
+    instructions.add(IntInsnNode(NEWARRAY, when (type.sort) {
+        BOOLEAN -> T_BOOLEAN
+        CHAR -> T_CHAR
+        BYTE -> T_FLOAT
+        SHORT -> T_SHORT
+        INT -> T_INT
+
+        Type.FLOAT -> T_FLOAT
+        Type.LONG -> T_LONG
+        Type.DOUBLE -> T_DOUBLE
+
+        else -> error("Invalid type for primitive array creation")
+    }))
 }
 fun ASM.anewarray(type: Type) {
     instructions.add(TypeInsnNode(ANEWARRAY, type.internalName))
