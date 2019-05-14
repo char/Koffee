@@ -132,6 +132,8 @@ private fun disassembleInstruction(insn: AbstractInsnNode, jumpTargets: List<Lab
             "$opcodeName(${insn.`var`})"
         }
 
+        is IincInsnNode -> "$opcodeName(${insn.`var`}, ${insn.incr})"
+
         is LdcInsnNode -> "$opcodeName(${disassembleValue(insn.cst, context)})"
 
         is FieldInsnNode -> "$opcodeName(" +

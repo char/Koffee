@@ -113,11 +113,11 @@ val ASM.ixor: U get() {
 val ASM.lxor: U get() {
     instructions.add(InsnNode(LXOR))
 }
-val ASM.iinc: U get() {
-    instructions.add(IincInsnNode(IINC, 1))
+fun ASM.iinc(slot: Int) {
+    instructions.add(IincInsnNode(slot, 1))
 }
-fun ASM.iinc(amount: Int) {
-    instructions.add(IincInsnNode(IINC, amount))
+fun ASM.iinc(slot: Int, amount: Int) {
+    instructions.add(IincInsnNode(slot, amount))
 }
 val ASM.i2l: U get() {
     instructions.add(InsnNode(I2L))
