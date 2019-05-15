@@ -14,6 +14,11 @@ abstract class ASM(internal val instructions: InsnList, internal val tryCatchBlo
             override val L = LabelRegistry(instructions)
         })
     }
+
+    fun mergeFrom(asm: ASM, label: KoffeeLabel) {
+        instructions.insert(label.labelNode, asm.instructions)
+        tryCatchBlocks.addAll(asm.tryCatchBlocks)
+    }
 }
 
 class MethodAssemblyContext(node: MethodNode) : ASM(node.instructions, node.tryCatchBlocks)
