@@ -6,7 +6,7 @@ import org.objectweb.asm.tree.TryCatchBlockNode
 
 interface LabelScope { val L: LabelRegistry }
 
-abstract class ASM(internal val instructions: InsnList, internal val tryCatchBlocks: MutableList<TryCatchBlockNode>) : LabelScope {
+abstract class ASM(internal val instructions: InsnList, internal val tryCatchBlocks: MutableList<TryCatchBlockNode>) : LabelScope, TypesAccess, ModifiersAccess {
     override val L = LabelRegistry(instructions)
 
     fun scope(routine: LabelScope.() -> Unit) {
