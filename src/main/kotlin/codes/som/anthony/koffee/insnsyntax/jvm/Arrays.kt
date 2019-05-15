@@ -64,7 +64,7 @@ fun ASM.newarray(type: Type) {
     instructions.add(IntInsnNode(NEWARRAY, when (type.sort) {
         BOOLEAN -> T_BOOLEAN
         CHAR -> T_CHAR
-        BYTE -> T_FLOAT
+        BYTE -> T_BYTE
         SHORT -> T_SHORT
         INT -> T_INT
 
