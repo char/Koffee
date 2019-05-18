@@ -7,8 +7,6 @@ import org.objectweb.asm.tree.TryCatchBlockNode
 interface LabelScope { val L: LabelRegistry }
 
 abstract class ASM(internal val instructions: InsnList, internal val tryCatchBlocks: MutableList<TryCatchBlockNode>) : LabelScope, TypesAccess, ModifiersAccess {
-    override val L = LabelRegistry(instructions)
-
     fun scope(routine: LabelScope.() -> Unit) {
         routine(object : LabelScope {
             override val L = LabelRegistry(instructions)
@@ -21,4 +19,6 @@ abstract class ASM(internal val instructions: InsnList, internal val tryCatchBlo
     }
 }
 
-class MethodAssemblyContext(node: MethodNode) : ASM(node.instructions, node.tryCatchBlocks)
+class MethodAssemblyContext(node: MethodNode) : ASM(node.instructions, node.tryCatchBlocks) {
+    override val L = LabelRegistry(instructions)
+}
