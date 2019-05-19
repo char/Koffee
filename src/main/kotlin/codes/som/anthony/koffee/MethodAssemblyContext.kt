@@ -9,7 +9,7 @@ interface LabelScope { val L: LabelRegistry }
 abstract class ASM(internal val instructions: InsnList, internal val tryCatchBlocks: MutableList<TryCatchBlockNode>) : LabelScope, TypesAccess, ModifiersAccess {
     fun scope(routine: LabelScope.() -> Unit) {
         routine(object : LabelScope {
-            override val L = LabelRegistry(instructions)
+            override val L = this@ASM.L.scope(instructions)
         })
     }
 

@@ -1,7 +1,6 @@
 package codes.som.anthony.koffee.insnsyntax.jvm
 
 import codes.som.anthony.koffee.ASM
-import codes.som.anthony.koffee.LabelRegistry
 import org.objectweb.asm.Opcodes.F_SAME1
 import org.objectweb.asm.Opcodes.GOTO
 import org.objectweb.asm.Type
@@ -10,7 +9,7 @@ import org.objectweb.asm.tree.*
 class GuardContext(private val asm: ASM,
         val startNode: LabelNode, val endNode: LabelNode, val exitNode: LabelNode) {
     internal class GuardHandlerAssemblyContext(instructions: InsnList, asm: ASM) : ASM(instructions, asm.tryCatchBlocks) {
-        override val L = asm.L
+        override val L = asm.L.copy(instructions)
     }
 
     fun handle(exceptionType: Type, fallthrough: Boolean = false, routine: ASM.() -> Unit): GuardContext {
