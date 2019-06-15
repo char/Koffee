@@ -22,7 +22,7 @@ class LabelRegistry(private val instructions: InsnList) {
     }
 }
 
-class KoffeeLabel(private val instructions: InsnList, internal val labelNode: LabelNode) {
+class KoffeeLabel(private val instructions: InsnList, val labelNode: LabelNode) {
     operator fun unaryPlus() {
         instructions.add(labelNode)
     }

@@ -8,7 +8,7 @@ import org.objectweb.asm.tree.MethodNode
 import kotlin.properties.Delegates
 
 class ClassAssemblyContext : TypesAccess, ModifiersAccess {
-    internal val node: ClassNode = ClassNode(ASM7).also {
+    val node: ClassNode = ClassNode(ASM7).also {
         it.version = 49
         it.superName = "java/lang/Object"
     }
@@ -34,14 +34,16 @@ class ClassAssemblyContext : TypesAccess, ModifiersAccess {
 
     val self get() = type(name)
 
-    fun field(access: Modifiers, type: Type, name: String, signature: String? = null, value: Any? = null) {
-        node.fields.add(FieldNode(ASM7, access.access, name, type.descriptor, signature, value))
+    fun field(access: Modifiers, type: Type, name: String, signature: String? = null, value: Any? = null): FieldNode {
+        val fieldNode = FieldNode(ASM7, access.access, name, type.descriptor, signature, value)
+        node.fields.add(fieldNode)
+        return fieldNode
     }
 
     fun method(access: Modifiers, name: String,
                returnType: Type, vararg parameterTypes: Type,
                signature: String? = null, exceptions: Array<Type>? = null,
-               routine: MethodAssemblyContext.() -> Unit) {
+               routine: MethodAssemblyContext.() -> Unit): MethodNode {
         val descriptor = Type.getMethodDescriptor(returnType, *parameterTypes)
 
         val methodNode = MethodNode(ASM7, access.access, name, descriptor, signature, exceptions?.map { it.internalName }?.toTypedArray())
@@ -49,5 +51,7 @@ class ClassAssemblyContext : TypesAccess, ModifiersAccess {
         routine(methodAssemblyContext)
 
         node.methods.add(methodNode)
+
+        return methodNode
     }
 }
