@@ -1,6 +1,6 @@
 package codes.som.anthony.koffee.insnsyntax.jvm
 
-import codes.som.anthony.koffee.ASM
+import codes.som.anthony.koffee.InsnASM
 import org.objectweb.asm.Opcodes.*
 import org.objectweb.asm.Type
 import org.objectweb.asm.Type.*
@@ -9,58 +9,58 @@ import org.objectweb.asm.tree.IntInsnNode
 import org.objectweb.asm.tree.MultiANewArrayInsnNode
 import org.objectweb.asm.tree.TypeInsnNode
 
-val ASM.iaload: U get() {
+val InsnASM.iaload: U get() {
     instructions.add(InsnNode(IALOAD))
 }
-val ASM.laload: U get() {
+val InsnASM.laload: U get() {
     instructions.add(InsnNode(LALOAD))
 }
-val ASM.faload: U get() {
+val InsnASM.faload: U get() {
     instructions.add(InsnNode(FALOAD))
 }
-val ASM.daload: U get() {
+val InsnASM.daload: U get() {
     instructions.add(InsnNode(DALOAD))
 }
-val ASM.aaload: U get() {
+val InsnASM.aaload: U get() {
     instructions.add(InsnNode(AALOAD))
 }
-val ASM.baload: U get() {
+val InsnASM.baload: U get() {
     instructions.add(InsnNode(BALOAD))
 }
-val ASM.caload: U get() {
+val InsnASM.caload: U get() {
     instructions.add(InsnNode(CALOAD))
 }
-val ASM.saload: U get() {
+val InsnASM.saload: U get() {
     instructions.add(InsnNode(SALOAD))
 }
-val ASM.iastore: U get() {
+val InsnASM.iastore: U get() {
     instructions.add(InsnNode(IASTORE))
 }
-val ASM.lastore: U get() {
+val InsnASM.lastore: U get() {
     instructions.add(InsnNode(LASTORE))
 }
-val ASM.fastore: U get() {
+val InsnASM.fastore: U get() {
     instructions.add(InsnNode(FASTORE))
 }
-val ASM.dastore: U get() {
+val InsnASM.dastore: U get() {
     instructions.add(InsnNode(DASTORE))
 }
-val ASM.aastore: U get() {
+val InsnASM.aastore: U get() {
     instructions.add(InsnNode(AASTORE))
 }
-val ASM.bastore: U get() {
+val InsnASM.bastore: U get() {
     instructions.add(InsnNode(BASTORE))
 }
-val ASM.castore: U get() {
+val InsnASM.castore: U get() {
     instructions.add(InsnNode(CASTORE))
 }
-val ASM.sastore: U get() {
+val InsnASM.sastore: U get() {
     instructions.add(InsnNode(SASTORE))
 }
-val ASM.arraylength: U get() {
+val InsnASM.arraylength: U get() {
     instructions.add(InsnNode(ARRAYLENGTH))
 }
-fun ASM.newarray(type: Type) {
+fun InsnASM.newarray(type: Type) {
     instructions.add(IntInsnNode(NEWARRAY, when (type.sort) {
         BOOLEAN -> T_BOOLEAN
         CHAR -> T_CHAR
@@ -75,9 +75,9 @@ fun ASM.newarray(type: Type) {
         else -> error("Invalid type for primitive array creation")
     }))
 }
-fun ASM.anewarray(type: Type) {
+fun InsnASM.anewarray(type: Type) {
     instructions.add(TypeInsnNode(ANEWARRAY, type.internalName))
 }
-fun ASM.multianewarray(type: Type, dimensions: Int) {
+fun InsnASM.multianewarray(type: Type, dimensions: Int) {
     instructions.add(MultiANewArrayInsnNode(type.descriptor, dimensions))
 }

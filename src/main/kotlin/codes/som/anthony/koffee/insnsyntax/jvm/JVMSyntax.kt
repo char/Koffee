@@ -1,11 +1,11 @@
 package codes.som.anthony.koffee.insnsyntax.jvm
 
-import codes.som.anthony.koffee.ASM
+import codes.som.anthony.koffee.InsnASM
 import org.objectweb.asm.Opcodes.NOP
 import org.objectweb.asm.tree.InsnNode
 
 internal typealias U = Unit
 
-val ASM.nop: U get() {
+val InsnASM.nop: U get() {
     instructions.add(InsnNode(NOP))
 }

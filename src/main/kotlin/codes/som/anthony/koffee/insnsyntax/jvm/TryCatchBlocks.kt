@@ -1,6 +1,8 @@
 package codes.som.anthony.koffee.insnsyntax.jvm
 
 import codes.som.anthony.koffee.ASM
+import codes.som.anthony.koffee.InsnASM
+import codes.som.anthony.koffee.LabelScope
 import org.objectweb.asm.Opcodes.F_SAME1
 import org.objectweb.asm.Opcodes.GOTO
 import org.objectweb.asm.Type
@@ -8,11 +10,12 @@ import org.objectweb.asm.tree.*
 
 class GuardContext(private val asm: ASM,
         val startNode: LabelNode, val endNode: LabelNode, val exitNode: LabelNode) {
-    internal class GuardHandlerAssemblyContext(instructions: InsnList, asm: ASM) : ASM(instructions, asm.tryCatchBlocks) {
+    internal class GuardHandlerAssemblyContext(override val instructions: InsnList, val asm: ASM) : ASM, LabelScope {
+        override val tryCatchBlocks = asm.tryCatchBlocks
         override val L = asm.L.copy(instructions)
     }
 
-    fun handle(exceptionType: Type, fallthrough: Boolean = false, routine: ASM.() -> Unit): GuardContext {
+    fun handle(exceptionType: Type, fallthrough: Boolean = false, routine: InsnASM.() -> Unit): GuardContext {
         val instructions = InsnList()
         val handlerNode = LabelNode()
         instructions.add(handlerNode)
@@ -31,7 +34,7 @@ class GuardContext(private val asm: ASM,
     }
 }
 
-fun ASM.guard(routine: ASM.() -> Unit): GuardContext {
+fun ASM.guard(routine: InsnASM.() -> Unit): GuardContext {
     val startNode = LabelNode()
     val endNode = LabelNode()
     val exitNode = LabelNode()

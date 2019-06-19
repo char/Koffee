@@ -1,12 +1,12 @@
 package codes.som.anthony.koffee.insnsyntax.jvm
 
-import codes.som.anthony.koffee.ASM
+import codes.som.anthony.koffee.InsnASM
 import org.objectweb.asm.Opcodes.*
 import org.objectweb.asm.tree.InsnNode
 
-val ASM.monitorenter: U get() {
+val InsnASM.monitorenter: U get() {
     instructions.add(InsnNode(MONITORENTER))
 }
-val ASM.monitorexit: U get() {
+val InsnASM.monitorexit: U get() {
     instructions.add(InsnNode(MONITOREXIT))
 }

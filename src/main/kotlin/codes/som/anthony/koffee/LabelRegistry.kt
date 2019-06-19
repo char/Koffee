@@ -22,8 +22,19 @@ class LabelRegistry(private val instructions: InsnList) {
     }
 }
 
-class KoffeeLabel(private val instructions: InsnList, val labelNode: LabelNode) {
+class KoffeeLabel(private val instructions: InsnList, override val labelNode: LabelNode) : LabelWrapper {
     operator fun unaryPlus() {
         instructions.add(labelNode)
+    }
+}
+
+interface LabelWrapper {
+    val labelNode: LabelNode
+}
+
+fun LabelNode.wrap(): LabelWrapper {
+    val labelNode = this
+    return object : LabelWrapper {
+        override val labelNode = labelNode
     }
 }

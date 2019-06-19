@@ -1,33 +1,33 @@
 package codes.som.anthony.koffee.insnsyntax.jvm
 
-import codes.som.anthony.koffee.ASM
+import codes.som.anthony.koffee.InsnASM
 import org.objectweb.asm.Opcodes.*
 import org.objectweb.asm.tree.InsnNode
 
-val ASM.pop: U get() {
+val InsnASM.pop: U get() {
     instructions.add(InsnNode(POP))
 }
-val ASM.pop2: U get() {
+val InsnASM.pop2: U get() {
     instructions.add(InsnNode(POP2))
 }
-val ASM.dup: U get() {
+val InsnASM.dup: U get() {
     instructions.add(InsnNode(DUP))
 }
-val ASM.dup_x1: U get() {
+val InsnASM.dup_x1: U get() {
     instructions.add(InsnNode(DUP_X1))
 }
-val ASM.dup_x2: U get() {
+val InsnASM.dup_x2: U get() {
     instructions.add(InsnNode(DUP_X2))
 }
-val ASM.dup2: U get() {
+val InsnASM.dup2: U get() {
     instructions.add(InsnNode(DUP2))
 }
-val ASM.dup2_x1: U get() {
+val InsnASM.dup2_x1: U get() {
     instructions.add(InsnNode(DUP2_X1))
 }
-val ASM.dup2_x2: U get() {
+val InsnASM.dup2_x2: U get() {
     instructions.add(InsnNode(DUP2_X2))
 }
-val ASM.swap: U get() {
+val InsnASM.swap: U get() {
     instructions.add(InsnNode(SWAP))
 }
