@@ -4,14 +4,14 @@ import org.objectweb.asm.tree.InsnList
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.TryCatchBlockNode
 
-interface InsnASM { val instructions: InsnList }
+interface InsnASM : TypesAccess, ModifiersAccess { val instructions: InsnList }
 interface LabelScope { val L: LabelRegistry }
 
 interface LabelledASM : InsnASM, LabelScope
 
 interface TryCatchContainer { val tryCatchBlocks: MutableList<TryCatchBlockNode> }
 
-interface ASM : LabelledASM, TryCatchContainer, TypesAccess, ModifiersAccess
+interface ASM : LabelledASM, TryCatchContainer
 
 abstract class AbstractASMImpl(override val instructions: InsnList, override val tryCatchBlocks: MutableList<TryCatchBlockNode>) : ASM {
     fun scope(routine: LabelScope.() -> Unit) {
