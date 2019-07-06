@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "codes.som.anthony"
-version = "4.1.1"
+version = "5.0.0"
 
 repositories {
     mavenCentral()
