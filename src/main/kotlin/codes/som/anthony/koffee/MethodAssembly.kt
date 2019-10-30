@@ -15,6 +15,14 @@ class MethodAssembly(val node: MethodNode) : InstructionAssembly, TryCatchContai
         get() = node.tryCatchBlocks
 
     override val L = LabelRegistry(this)
+
+    var maxStack: Int
+        get() = node.maxStack
+        set(value) { node.maxStack = value }
+    
+    var maxLocals: Int
+        get() = node.maxLocals
+        set(value) { node.maxLocals = value }
 }
 
 fun MethodNode.koffee(routine: MethodAssembly.() -> Unit): MethodNode {
