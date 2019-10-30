@@ -1,18 +1,24 @@
 package codes.som.anthony.koffee
 
-import org.objectweb.asm.Opcodes
-import org.objectweb.asm.Type
+import codes.som.anthony.koffee.insns.InstructionAssembly
+import codes.som.anthony.koffee.labels.LabelRegistry
+import codes.som.anthony.koffee.labels.LabelScope
+import org.objectweb.asm.tree.InsnList
 import org.objectweb.asm.tree.MethodNode
+import org.objectweb.asm.tree.TryCatchBlockNode
 
-fun assembleMethod(access: Modifiers, name: String,
-        returnType: Type, vararg parameterTypes: Type,
-        signature: String? = null, exceptions: Array<Type>? = null,
-        routine: MethodAssemblyContext.() -> Unit): MethodNode {
-    val descriptor = Type.getMethodDescriptor(returnType, *parameterTypes)
+class MethodAssembly(val node: MethodNode) : InstructionAssembly, TryCatchContainer, LabelScope {
+    override val instructions: InsnList
+        get() = node.instructions
 
-    val methodNode = MethodNode(Opcodes.ASM7, access.access, name, descriptor, signature, exceptions?.map { it.internalName }?.toTypedArray())
-    val methodAssemblyContext = MethodAssemblyContext(methodNode)
-    routine(methodAssemblyContext)
+    override val tryCatchBlocks: MutableList<TryCatchBlockNode>
+        get() = node.tryCatchBlocks
 
-    return methodNode
+    override val L = LabelRegistry(this)
+}
+
+fun MethodNode.koffee(routine: MethodAssembly.() -> Unit): MethodNode {
+    val assembly = MethodAssembly(this)
+    routine(assembly)
+    return assembly.node
 }
