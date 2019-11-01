@@ -3,11 +3,13 @@ package codes.som.anthony.koffee
 import codes.som.anthony.koffee.insns.InstructionAssembly
 import codes.som.anthony.koffee.labels.LabelRegistry
 import codes.som.anthony.koffee.labels.LabelScope
+import codes.som.anthony.koffee.sugar.ModifiersAccess
+import codes.som.anthony.koffee.sugar.TypesAccess
 import org.objectweb.asm.tree.InsnList
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.TryCatchBlockNode
 
-class MethodAssembly(val node: MethodNode) : InstructionAssembly, TryCatchContainer, LabelScope {
+class MethodAssembly(val node: MethodNode) : InstructionAssembly, TryCatchContainer, LabelScope, ModifiersAccess, TypesAccess {
     override val instructions: InsnList
         get() = node.instructions
 

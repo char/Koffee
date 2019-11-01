@@ -1,3 +1,5 @@
+@file:Suppress("HasPlatformType")
+
 package codes.som.anthony.koffee.types
 
 import org.objectweb.asm.Type

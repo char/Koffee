@@ -1,6 +1,8 @@
 package codes.som.anthony.koffee
 
 import codes.som.anthony.koffee.modifiers.Modifiers
+import codes.som.anthony.koffee.sugar.ModifiersAccess
+import codes.som.anthony.koffee.sugar.TypesAccess
 import codes.som.anthony.koffee.types.TypeLike
 import codes.som.anthony.koffee.types.coerceType
 import org.objectweb.asm.Opcodes.ASM7
@@ -9,7 +11,7 @@ import org.objectweb.asm.Type
 import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.MethodNode
 
-class ClassAssembly internal constructor(val node: ClassNode) {
+class ClassAssembly internal constructor(val node: ClassNode): ModifiersAccess, TypesAccess {
     internal constructor(access: Modifiers, name: String, version: Int, superName: String) : this(ClassNode(ASM7).also {
         it.name = name
         it.version = version
