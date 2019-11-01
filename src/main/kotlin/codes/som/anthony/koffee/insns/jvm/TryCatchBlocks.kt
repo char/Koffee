@@ -19,7 +19,7 @@ class GuardAssembly<T>(private val assembly: T,
         override val L = assembly.L.copy(assembly)
     }
 
-    fun <S> handle(exceptionType: TypeLike, fallthrough: Boolean = false, routine: GuardHandlerAssemblyContext<T>.() -> Unit): GuardAssembly<T> {
+    fun handle(exceptionType: TypeLike, fallthrough: Boolean = false, routine: GuardHandlerAssemblyContext<T>.() -> Unit): GuardAssembly<T> {
         val instructions = InsnList()
         val handlerNode = LabelNode()
         instructions.add(handlerNode)

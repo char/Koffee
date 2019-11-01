@@ -4,8 +4,6 @@ import codes.som.anthony.koffee.insns.jvm.getstatic
 import codes.som.anthony.koffee.insns.jvm.invokevirtual
 import codes.som.anthony.koffee.insns.jvm.ldc
 import codes.som.anthony.koffee.modifiers.public
-import codes.som.anthony.koffee.modifiers.static
-import codes.som.anthony.koffee.types.void
 import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.ClassWriter.COMPUTE_FRAMES
 import java.io.PrintStream
