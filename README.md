@@ -21,10 +21,10 @@ and the preferred approach of a leading underscore before the reserved name.
 val helloWorld: ClassNode = assembleClass(public, "com/example/HelloWorld") {
     name = "com/example/HelloWorld"
 
-    method(public + static, "main", Array<String>::class) {
+    method(public + static, "main", void, Array<String>::class) {
         getstatic(System::class, "out", PrintStream::class)
-        ldc("Hello, world!")
-        invokevirtual(PrintStream::class, void, String::class)
+        ldc("Hello, World!")
+        invokevirtual(PrintStream::class, "println", void, String::class)
         _return
     }
 }
