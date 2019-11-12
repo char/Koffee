@@ -23,7 +23,7 @@ val helloWorld: ClassNode = assembleClass(public, "com/example/HelloWorld") {
 
     method(public + static, "main", void, Array<String>::class) {
         getstatic(System::class, "out", PrintStream::class)
-        ldc("Hello, World!")
+        ldc("Hello, world!")
         invokevirtual(PrintStream::class, "println", void, String::class)
         _return
     }
