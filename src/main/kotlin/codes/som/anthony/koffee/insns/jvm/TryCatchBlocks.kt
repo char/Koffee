@@ -5,9 +5,11 @@ import codes.som.anthony.koffee.insns.InstructionAssembly
 import codes.som.anthony.koffee.labels.LabelScope
 import codes.som.anthony.koffee.types.TypeLike
 import codes.som.anthony.koffee.types.coerceType
-import org.objectweb.asm.Opcodes.F_SAME1
 import org.objectweb.asm.Opcodes.GOTO
-import org.objectweb.asm.tree.*
+import org.objectweb.asm.tree.InsnList
+import org.objectweb.asm.tree.JumpInsnNode
+import org.objectweb.asm.tree.LabelNode
+import org.objectweb.asm.tree.TryCatchBlockNode
 
 class GuardAssembly<T>(private val assembly: T,
         val startNode: LabelNode, val endNode: LabelNode, val exitNode: LabelNode)
@@ -23,7 +25,6 @@ class GuardAssembly<T>(private val assembly: T,
         val instructions = InsnList()
         val handlerNode = LabelNode()
         instructions.add(handlerNode)
-        instructions.add(FrameNode(F_SAME1, 0, null, 1, arrayOf(coerceType(exceptionType).internalName)))
 
         val embeddedASM = GuardHandlerAssemblyContext(instructions, assembly)
         routine(embeddedASM)
