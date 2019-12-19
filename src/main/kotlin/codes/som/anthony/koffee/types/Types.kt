@@ -3,6 +3,7 @@
 package codes.som.anthony.koffee.types
 
 import org.objectweb.asm.Type
+import org.objectweb.asm.tree.ClassNode
 import kotlin.reflect.KClass
 
 val void get() = Type.VOID_TYPE
@@ -28,6 +29,7 @@ fun coerceType(value: TypeLike): Type {
         is KClass<*> -> Type.getType(value.java)
         is Class<*> -> Type.getType(value)
         is String -> Type.getObjectType(value)
+        is ClassNode -> Type.getObjectType(value.name)
         else -> error("Non type-like object passed to coerceType()")
     }
 }
