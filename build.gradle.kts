@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "codes.som.anthony"
-version = "6.4.0"
+version = "7.0.0"
 
 repositories {
     mavenCentral()
@@ -16,7 +16,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     arrayOf("asm", "asm-tree", "asm-commons").forEach {
-        implementation(group = "org.ow2.asm", name = it, version = "7.1")
+        implementation(group = "org.ow2.asm", name = it, version = "7.2")
     }
 }
 
