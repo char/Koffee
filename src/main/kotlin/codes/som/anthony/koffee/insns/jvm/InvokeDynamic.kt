@@ -15,7 +15,7 @@ fun InstructionAssembly.invokedynamic(name: String, descriptor: String, handle: 
     instructions.add(InvokeDynamicInsnNode(name, descriptor, handle, *args))
 }
 fun InstructionAssembly.invokedynamic(name: String, returnType: TypeLike, vararg parameterTypes: TypeLike, handle: Handle, args: Array<out Any>) {
-    invokedynamic(name, constructMethodDescriptor(returnType, parameterTypes), handle, args)
+    invokedynamic(name, constructMethodDescriptor(returnType, *parameterTypes), handle, args)
 }
 fun InstructionAssembly.invokedynamic(method: MethodInsnNode, handle: Handle, args: Array<out Any>) {
     invokedynamic(method.name, method.desc, handle, args)
@@ -35,16 +35,16 @@ fun InstructionAssembly.h_invokestatic(owner: TypeLike, name: String, descriptor
 }
 
 fun InstructionAssembly.h_invokevirtual(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike, isInterface: Boolean = false): Handle {
-    return h_invokevirtual(owner, name, constructMethodDescriptor(returnType, parameterTypes), isInterface)
+    return h_invokevirtual(owner, name, constructMethodDescriptor(returnType, *parameterTypes), isInterface)
 }
 fun InstructionAssembly.h_invokespecial(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike, isInterface: Boolean = false): Handle {
-    return h_invokespecial(owner, name, constructMethodDescriptor(returnType, parameterTypes), isInterface)
+    return h_invokespecial(owner, name, constructMethodDescriptor(returnType, *parameterTypes), isInterface)
 }
 fun InstructionAssembly.h_invokeinterface(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike, isInterface: Boolean = false): Handle {
-    return h_invokeinterface(owner, name, constructMethodDescriptor(returnType, parameterTypes), isInterface)
+    return h_invokeinterface(owner, name, constructMethodDescriptor(returnType, *parameterTypes), isInterface)
 }
 fun InstructionAssembly.h_invokestatic(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike, isInterface: Boolean = false): Handle {
-    return h_invokestatic(owner, name, constructMethodDescriptor(returnType, parameterTypes), isInterface)
+    return h_invokestatic(owner, name, constructMethodDescriptor(returnType, *parameterTypes), isInterface)
 }
 
 fun InstructionAssembly.h_invokevirtual(owner: TypeLike, method: MethodNode, isInterface: Boolean = false): Handle {

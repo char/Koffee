@@ -23,16 +23,16 @@ fun InstructionAssembly.invokestatic(owner: TypeLike, name: String, descriptor: 
 }
 
 fun InstructionAssembly.invokevirtual(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike) {
-    invokevirtual(owner, name, constructMethodDescriptor(returnType, parameterTypes))
+    invokevirtual(owner, name, constructMethodDescriptor(returnType, *parameterTypes))
 }
 fun InstructionAssembly.invokespecial(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike) {
-    invokespecial(owner, name, constructMethodDescriptor(returnType, parameterTypes))
+    invokespecial(owner, name, constructMethodDescriptor(returnType, *parameterTypes))
 }
 fun InstructionAssembly.invokeinterface(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike) {
-    invokeinterface(owner, name, constructMethodDescriptor(returnType, parameterTypes))
+    invokeinterface(owner, name, constructMethodDescriptor(returnType, *parameterTypes))
 }
 fun InstructionAssembly.invokestatic(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike) {
-    invokestatic(owner, name, constructMethodDescriptor(returnType, parameterTypes))
+    invokestatic(owner, name, constructMethodDescriptor(returnType, *parameterTypes))
 }
 
 fun InstructionAssembly.invokevirtual(owner: TypeLike, method: MethodNode) {
