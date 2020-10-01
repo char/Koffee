@@ -13,6 +13,18 @@ open class Modifiers(val access: Int) {
     operator fun plus(modifiers: Modifiers): Modifiers {
         return Modifiers(this.access or modifiers.access)
     }
+
+    fun containsAll(modifiers: Modifiers): Boolean {
+        return (this.access and modifiers.access) == modifiers.access
+    }
+
+    fun containsAny(modifiers: Modifiers): Boolean {
+        return (this.access and modifiers.access) != 0
+    }
+
+    fun containsOther(modifiers: Modifiers): Boolean {
+        return containsAny(Modifiers(modifiers.access.inv()))
+    }
 }
 
 object package_private : Modifiers(0)
