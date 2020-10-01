@@ -6,8 +6,8 @@ import codes.som.anthony.koffee.insns.jvm.invokespecial
 import codes.som.anthony.koffee.types.TypeLike
 
 object MethodAssemblyExtension {
-    fun MethodAssembly.call_super(superClass: TypeLike = Object::class, name: String = "<init>") {
+    fun MethodAssembly.call_super(superClass: TypeLike = Object::class, name: String = "<init>", returnType: TypeLike = void) {
         aload_0 // load this
-        invokespecial(superClass, name, void)
+        invokespecial(superClass, name, returnType)
     }
 }
