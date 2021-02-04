@@ -57,6 +57,6 @@ fun InstructionAssembly.bipush(v: Int) {
 fun InstructionAssembly.sipush(v: Int) {
     instructions.add(IntInsnNode(SIPUSH, v))
 }
-fun InstructionAssembly.ldc(v: Any) {
-    instructions.add(LdcInsnNode(v))
+fun InstructionAssembly.ldc(v: Any?) {
+    instructions.add(if (v == null) InsnNode(ACONST_NULL) else LdcInsnNode(v))
 }
