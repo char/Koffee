@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.70"
+    kotlin("jvm") version "1.6.10"
     `maven-publish`
 }
 
@@ -13,10 +13,8 @@ repositories {
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-
     arrayOf("asm", "asm-tree", "asm-commons").forEach {
-        implementation(group = "org.ow2.asm", name = it, version = "8.0.1")
+        implementation("org.ow2.asm:$it:9.2")
     }
 }
 
