@@ -1,6 +1,12 @@
+@file:Suppress("unused") // Receivers used to avoid scope pollution
+
 package codes.som.anthony.koffee.insns.jvm
 
 import codes.som.anthony.koffee.insns.InstructionAssembly
+import codes.som.anthony.koffee.types.TypeLike
+import codes.som.anthony.koffee.types.coerceType
+import org.objectweb.asm.ConstantDynamic
+import org.objectweb.asm.Handle
 import org.objectweb.asm.Opcodes.*
 import org.objectweb.asm.tree.InsnNode
 import org.objectweb.asm.tree.IntInsnNode
@@ -59,4 +65,7 @@ public fun InstructionAssembly.sipush(v: Int) {
 }
 public fun InstructionAssembly.ldc(v: Any) {
     instructions.add(LdcInsnNode(v))
+}
+public fun InstructionAssembly.constantDynamic(name: String, type: TypeLike, handle: Handle, vararg boostrapMethodArguments: Any): ConstantDynamic {
+    return ConstantDynamic(name, coerceType(type).descriptor, handle, boostrapMethodArguments)
 }
