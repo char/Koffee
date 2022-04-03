@@ -9,25 +9,25 @@ import org.objectweb.asm.tree.InsnList
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.TryCatchBlockNode
 
-class MethodAssembly(val node: MethodNode) : InstructionAssembly, TryCatchContainer, LabelScope, ModifiersAccess, TypesAccess {
+public class MethodAssembly(public val node: MethodNode) : InstructionAssembly, TryCatchContainer, LabelScope, ModifiersAccess, TypesAccess {
     override val instructions: InsnList
         get() = node.instructions
 
     override val tryCatchBlocks: MutableList<TryCatchBlockNode>
         get() = node.tryCatchBlocks
 
-    override val L = LabelRegistry(this)
+    override val L: LabelRegistry = LabelRegistry(this)
 
-    var maxStack: Int
+    public var maxStack: Int
         get() = node.maxStack
         set(value) { node.maxStack = value }
     
-    var maxLocals: Int
+    public var maxLocals: Int
         get() = node.maxLocals
         set(value) { node.maxLocals = value }
 }
 
-fun MethodNode.koffee(routine: MethodAssembly.() -> Unit): MethodNode {
+public fun MethodNode.koffee(routine: MethodAssembly.() -> Unit): MethodNode {
     val assembly = MethodAssembly(this)
     routine(assembly)
     return assembly.node

@@ -1,33 +1,36 @@
 package codes.som.anthony.koffee.sugar
 
-@Suppress("PropertyName")
-interface ModifiersAccess {
-    val package_private get() = codes.som.anthony.koffee.modifiers.package_private
-    val public get() = codes.som.anthony.koffee.modifiers.public
-    val private get() = codes.som.anthony.koffee.modifiers.private
-    val protected get() = codes.som.anthony.koffee.modifiers.protected
-    val static get() = codes.som.anthony.koffee.modifiers.static
-    val final get() = codes.som.anthony.koffee.modifiers.final
-    val `super` get() = codes.som.anthony.koffee.modifiers.`super`
-    val _super get() = codes.som.anthony.koffee.modifiers._super
-    val synchronized get() = codes.som.anthony.koffee.modifiers.synchronized
-    val open get() = codes.som.anthony.koffee.modifiers.open
-    val transitive get() = codes.som.anthony.koffee.modifiers.transitive
-    val volatile get() = codes.som.anthony.koffee.modifiers.volatile
-    val bridge get() = codes.som.anthony.koffee.modifiers.bridge
-    val static_phase get() = codes.som.anthony.koffee.modifiers.static_phase
-    val varargs get() = codes.som.anthony.koffee.modifiers.varargs
-    val transient get() = codes.som.anthony.koffee.modifiers.transient
-    val native get() = codes.som.anthony.koffee.modifiers.native
-    val `interface` get() = codes.som.anthony.koffee.modifiers.`interface`
-    val _interface get() = codes.som.anthony.koffee.modifiers._interface
-    val abstract get() = codes.som.anthony.koffee.modifiers.abstract
-    val strict get() = codes.som.anthony.koffee.modifiers.strict
-    val synthetic get() = codes.som.anthony.koffee.modifiers.synthetic
-    val annotation get() = codes.som.anthony.koffee.modifiers.annotation
-    val enum get() = codes.som.anthony.koffee.modifiers.enum
-    val mandated get() = codes.som.anthony.koffee.modifiers.mandated
-    val module get() = codes.som.anthony.koffee.modifiers.module
+import codes.som.anthony.koffee.modifiers.Modifiers
 
-    val deprecated get() = codes.som.anthony.koffee.modifiers.deprecated
+@Suppress("PropertyName")
+public interface ModifiersAccess {
+    public val package_private: Modifiers get() = codes.som.anthony.koffee.modifiers.package_private
+    public val public:          Modifiers get() = codes.som.anthony.koffee.modifiers.public
+    public val private:         Modifiers get() = codes.som.anthony.koffee.modifiers.private
+    public val protected:       Modifiers get() = codes.som.anthony.koffee.modifiers.protected
+    public val static:          Modifiers get() = codes.som.anthony.koffee.modifiers.static
+    public val final:           Modifiers get() = codes.som.anthony.koffee.modifiers.final
+    public val `super`:         Modifiers get() = codes.som.anthony.koffee.modifiers.`super`
+    public val _super:          Modifiers get() = codes.som.anthony.koffee.modifiers._super
+    public val synchronized:    Modifiers get() = codes.som.anthony.koffee.modifiers.synchronized
+    public val open:            Modifiers get() = codes.som.anthony.koffee.modifiers.open
+    public val transitive:      Modifiers get() = codes.som.anthony.koffee.modifiers.transitive
+    public val volatile:        Modifiers get() = codes.som.anthony.koffee.modifiers.volatile
+    public val bridge:          Modifiers get() = codes.som.anthony.koffee.modifiers.bridge
+    public val static_phase:    Modifiers get() = codes.som.anthony.koffee.modifiers.static_phase
+    public val varargs:         Modifiers get() = codes.som.anthony.koffee.modifiers.varargs
+    public val transient:       Modifiers get() = codes.som.anthony.koffee.modifiers.transient
+    public val native:          Modifiers get() = codes.som.anthony.koffee.modifiers.native
+    public val `interface`:     Modifiers get() = codes.som.anthony.koffee.modifiers.`interface`
+    public val _interface:      Modifiers get() = codes.som.anthony.koffee.modifiers._interface
+    public val abstract:        Modifiers get() = codes.som.anthony.koffee.modifiers.abstract
+    public val strict:          Modifiers get() = codes.som.anthony.koffee.modifiers.strict
+    public val synthetic:       Modifiers get() = codes.som.anthony.koffee.modifiers.synthetic
+    public val annotation:      Modifiers get() = codes.som.anthony.koffee.modifiers.annotation
+    public val enum:            Modifiers get() = codes.som.anthony.koffee.modifiers.enum
+    public val mandated:        Modifiers get() = codes.som.anthony.koffee.modifiers.mandated
+    public val module:          Modifiers get() = codes.som.anthony.koffee.modifiers.module
+
+    // ASM-specific
+    public val deprecated:      Modifiers get() = codes.som.anthony.koffee.modifiers.deprecated
 }

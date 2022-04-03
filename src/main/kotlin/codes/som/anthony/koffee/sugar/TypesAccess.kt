@@ -1,17 +1,18 @@
 package codes.som.anthony.koffee.sugar
 
 import codes.som.anthony.koffee.types.TypeLike
+import org.objectweb.asm.Type
 
-interface TypesAccess {
-    val void get() = codes.som.anthony.koffee.types.void
-    val char get() = codes.som.anthony.koffee.types.char
-    val byte get() = codes.som.anthony.koffee.types.byte
-    val short get() = codes.som.anthony.koffee.types.short
-    val int get() = codes.som.anthony.koffee.types.int
-    val float get() = codes.som.anthony.koffee.types.float
-    val long get() = codes.som.anthony.koffee.types.long
-    val double get() = codes.som.anthony.koffee.types.double
-    val boolean get() = codes.som.anthony.koffee.types.boolean
+public interface TypesAccess {
+    public val void:    Type get() = codes.som.anthony.koffee.types.void
+    public val char:    Type get() = codes.som.anthony.koffee.types.char
+    public val byte:    Type get() = codes.som.anthony.koffee.types.byte
+    public val short:   Type get() = codes.som.anthony.koffee.types.short
+    public val int:     Type get() = codes.som.anthony.koffee.types.int
+    public val float:   Type get() = codes.som.anthony.koffee.types.float
+    public val long:    Type get() = codes.som.anthony.koffee.types.long
+    public val double:  Type get() = codes.som.anthony.koffee.types.double
+    public val boolean: Type get() = codes.som.anthony.koffee.types.boolean
 
-    fun coerceType(value: TypeLike) = codes.som.anthony.koffee.types.coerceType(value)
+    public fun coerceType(value: TypeLike): Type = codes.som.anthony.koffee.types.coerceType(value)
 }

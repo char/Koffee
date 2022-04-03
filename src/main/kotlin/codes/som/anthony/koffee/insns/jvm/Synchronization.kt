@@ -5,9 +5,9 @@ import org.objectweb.asm.Opcodes.MONITORENTER
 import org.objectweb.asm.Opcodes.MONITOREXIT
 import org.objectweb.asm.tree.InsnNode
 
-val InstructionAssembly.monitorenter: U get() {
+public val InstructionAssembly.monitorenter: U get() {
     instructions.add(InsnNode(MONITORENTER))
 }
-val InstructionAssembly.monitorexit: U get() {
+public val InstructionAssembly.monitorexit: U get() {
     instructions.add(InsnNode(MONITOREXIT))
 }
