@@ -8,9 +8,9 @@ import codes.som.anthony.koffee.types.TypeLike
 import org.objectweb.asm.tree.MethodNode
 import java.lang.IllegalArgumentException
 
-object ClassAssemblyExtension {
-    fun ClassAssembly.init(access: Modifiers, vararg parameterTypes: TypeLike,
-                           superClass: TypeLike = Object::class, routine: MethodAssembly.() -> Unit): MethodNode {
+public object ClassAssemblyExtension {
+    public fun ClassAssembly.init(access: Modifiers, vararg parameterTypes: TypeLike,
+                                  superClass: TypeLike = Object::class, routine: MethodAssembly.() -> Unit): MethodNode {
         if (access.containsOther(public + private + protected + package_private)) {
             throw IllegalArgumentException("Method 'init' has illegal modifiers! " +
                     "Legal modifiers include: public, private, protected, and package private."
@@ -23,7 +23,7 @@ object ClassAssemblyExtension {
         }
     }
 
-    fun ClassAssembly.clinit(routine: MethodAssembly.() -> Unit): MethodNode {
+    public fun ClassAssembly.clinit(routine: MethodAssembly.() -> Unit): MethodNode {
         return method(static, "<clinit>", void, routine = routine)
     }
 }

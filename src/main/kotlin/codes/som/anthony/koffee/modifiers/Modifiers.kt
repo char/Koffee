@@ -7,52 +7,52 @@ package codes.som.anthony.koffee.modifiers
 import org.objectweb.asm.Opcodes.*
 
 // Wrap access flags in 'Modifiers' objects
-open class Modifiers(val access: Int) {
+public open class Modifiers(public val access: Int) {
     // We want to use the '+' operator to combine modifiers,
     // but internally we should use the bitwise 'or'.
-    operator fun plus(modifiers: Modifiers): Modifiers {
+    public operator fun plus(modifiers: Modifiers): Modifiers {
         return Modifiers(this.access or modifiers.access)
     }
 
-    fun containsAll(modifiers: Modifiers): Boolean {
+    public fun containsAll(modifiers: Modifiers): Boolean {
         return (this.access and modifiers.access) == modifiers.access
     }
 
-    fun containsAny(modifiers: Modifiers): Boolean {
+    public fun containsAny(modifiers: Modifiers): Boolean {
         return (this.access and modifiers.access) != 0
     }
 
-    fun containsOther(modifiers: Modifiers): Boolean {
+    public fun containsOther(modifiers: Modifiers): Boolean {
         return containsAny(Modifiers(modifiers.access.inv()))
     }
 }
 
-object package_private : Modifiers(0)
-object public : Modifiers(ACC_PUBLIC)
-object private : Modifiers(ACC_PRIVATE)
-object protected : Modifiers(ACC_PROTECTED)
-object static : Modifiers(ACC_STATIC)
-object final : Modifiers(ACC_FINAL)
-object `super` : Modifiers(ACC_SUPER)
-val _super get() = `super`
-object synchronized : Modifiers(ACC_SYNCHRONIZED)
-object open : Modifiers(ACC_OPEN)
-object transitive : Modifiers(ACC_TRANSITIVE)
-object volatile : Modifiers(ACC_VOLATILE)
-object bridge : Modifiers(ACC_BRIDGE)
-object static_phase : Modifiers(ACC_STATIC_PHASE)
-object varargs : Modifiers(ACC_VARARGS)
-object transient : Modifiers(ACC_TRANSIENT)
-object native : Modifiers(ACC_NATIVE)
-object `interface` : Modifiers(ACC_INTERFACE)
-val _interface get() = `interface`
-object abstract : Modifiers(ACC_ABSTRACT)
-object strict : Modifiers(ACC_STRICT)
-object synthetic : Modifiers(ACC_SYNTHETIC)
-object annotation : Modifiers(ACC_ANNOTATION)
-object enum : Modifiers(ACC_ENUM)
-object mandated : Modifiers(ACC_MANDATED)
-object module : Modifiers(ACC_MODULE)
+public object package_private : Modifiers(0)
+public object public          : Modifiers(ACC_PUBLIC)
+public object private         : Modifiers(ACC_PRIVATE)
+public object protected       : Modifiers(ACC_PROTECTED)
+public object static          : Modifiers(ACC_STATIC)
+public object final           : Modifiers(ACC_FINAL)
+public object `super`         : Modifiers(ACC_SUPER)
+public val _super             : Modifiers get() = `super`
+public object synchronized    : Modifiers(ACC_SYNCHRONIZED)
+public object open            : Modifiers(ACC_OPEN)
+public object transitive      : Modifiers(ACC_TRANSITIVE)
+public object volatile        : Modifiers(ACC_VOLATILE)
+public object bridge          : Modifiers(ACC_BRIDGE)
+public object static_phase    : Modifiers(ACC_STATIC_PHASE)
+public object varargs         : Modifiers(ACC_VARARGS)
+public object transient       : Modifiers(ACC_TRANSIENT)
+public object native          : Modifiers(ACC_NATIVE)
+public object `interface`     : Modifiers(ACC_INTERFACE)
+public val _interface         : Modifiers get() = `interface`
+public object abstract        : Modifiers(ACC_ABSTRACT)
+public object strict          : Modifiers(ACC_STRICT)
+public object synthetic       : Modifiers(ACC_SYNTHETIC)
+public object annotation      : Modifiers(ACC_ANNOTATION)
+public object enum            : Modifiers(ACC_ENUM)
+public object mandated        : Modifiers(ACC_MANDATED)
+public object module          : Modifiers(ACC_MODULE)
 
 // ASM-specific
-object deprecated : Modifiers(ACC_DEPRECATED)
+public object deprecated      : Modifiers(ACC_DEPRECATED)

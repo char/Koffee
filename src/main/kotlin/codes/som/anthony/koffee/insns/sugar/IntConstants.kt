@@ -3,7 +3,7 @@ package codes.som.anthony.koffee.insns.sugar
 import codes.som.anthony.koffee.insns.InstructionAssembly
 import codes.som.anthony.koffee.insns.jvm.*
 
-fun InstructionAssembly.push_int(i: Int) {
+public fun InstructionAssembly.push_int(i: Int) {
     when (i) {
         -1 -> iconst_m1
         0 -> iconst_0
