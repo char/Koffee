@@ -2,6 +2,7 @@
 
 package codes.som.anthony.koffee.insns.jvm
 
+import codes.som.anthony.koffee.ClassAssembly
 import codes.som.anthony.koffee.insns.InstructionAssembly
 import codes.som.anthony.koffee.types.TypeLike
 import codes.som.anthony.koffee.types.coerceType
@@ -66,6 +67,6 @@ public fun InstructionAssembly.sipush(v: Int) {
 public fun InstructionAssembly.ldc(v: Any) {
     instructions.add(LdcInsnNode(v))
 }
-public fun InstructionAssembly.constantDynamic(name: String, type: TypeLike, handle: Handle, vararg boostrapMethodArguments: Any): ConstantDynamic {
+public fun ClassAssembly.constantDynamic(name: String, type: TypeLike, handle: Handle, vararg boostrapMethodArguments: Any): ConstantDynamic {
     return ConstantDynamic(name, coerceType(type).descriptor, handle, boostrapMethodArguments)
 }
