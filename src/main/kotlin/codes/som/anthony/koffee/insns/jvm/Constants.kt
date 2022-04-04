@@ -68,5 +68,9 @@ public fun InstructionAssembly.ldc(v: Any) {
     instructions.add(LdcInsnNode(v))
 }
 public fun ClassAssembly.constantDynamic(name: String, type: TypeLike, handle: Handle, vararg boostrapMethodArguments: Any): ConstantDynamic {
-    return ConstantDynamic(name, coerceType(type).descriptor, handle, boostrapMethodArguments)
+    return if (boostrapMethodArguments.isEmpty()) {
+        ConstantDynamic(name, coerceType(type).descriptor, handle)
+    } else {
+        ConstantDynamic(name, coerceType(type).descriptor, handle, *boostrapMethodArguments)
+    }
 }
