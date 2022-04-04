@@ -8,6 +8,7 @@ import codes.som.anthony.koffee.types.coerceType
 import codes.som.anthony.koffee.util.constructMethodDescriptor
 import org.objectweb.asm.Handle
 import org.objectweb.asm.Opcodes
+import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.MethodNode
 
 public fun InstructionAssembly.h_invokevirtual(owner: TypeLike, name: String, descriptor: String, isInterface: Boolean = false): Handle {
@@ -50,18 +51,6 @@ public fun InstructionAssembly.h_invokeinterface(owner: TypeLike, name: String, 
 public fun InstructionAssembly.h_invokestatic(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike, isInterface: Boolean = false): Handle {
     return h_invokestatic(owner, name, constructMethodDescriptor(returnType, *parameterTypes), isInterface)
 }
-public fun InstructionAssembly.h_putfield(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike, isInterface: Boolean = false): Handle {
-    return h_putfield(owner, name, constructMethodDescriptor(returnType, *parameterTypes), isInterface)
-}
-public fun InstructionAssembly.h_getfield(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike, isInterface: Boolean = false): Handle {
-    return h_getfield(owner, name, constructMethodDescriptor(returnType, *parameterTypes), isInterface)
-}
-public fun InstructionAssembly.h_putstatic(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike, isInterface: Boolean = false): Handle {
-    return h_putstatic(owner, name, constructMethodDescriptor(returnType, *parameterTypes), isInterface)
-}
-public fun InstructionAssembly.h_getstatic(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike, isInterface: Boolean = false): Handle {
-    return h_getstatic(owner, name, constructMethodDescriptor(returnType, *parameterTypes), isInterface)
-}
 public fun InstructionAssembly.h_newinvokespecial(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike, isInterface: Boolean = false): Handle {
     return h_newinvokespecial(owner, name, constructMethodDescriptor(returnType, *parameterTypes), isInterface)
 }
@@ -78,17 +67,17 @@ public fun InstructionAssembly.h_invokeinterface(owner: TypeLike, method: Method
 public fun InstructionAssembly.h_invokestatic(owner: TypeLike, method: MethodNode, isInterface: Boolean = false): Handle {
     return h_invokestatic(owner, method.name, method.desc, isInterface)
 }
-public fun InstructionAssembly.h_putfield(owner: TypeLike, method: MethodNode, isInterface: Boolean = false): Handle {
-    return h_putfield(owner, method.name, method.desc, isInterface)
+public fun InstructionAssembly.h_putfield(owner: TypeLike, field: FieldNode, isInterface: Boolean = false): Handle {
+    return h_putfield(owner, field.name, field.desc, isInterface)
 }
-public fun InstructionAssembly.h_getfield(owner: TypeLike, method: MethodNode, isInterface: Boolean = false): Handle {
-    return h_getfield(owner, method.name, method.desc, isInterface)
+public fun InstructionAssembly.h_getfield(owner: TypeLike, field: FieldNode, isInterface: Boolean = false): Handle {
+    return h_getfield(owner, field.name, field.desc, isInterface)
 }
-public fun InstructionAssembly.h_putstatic(owner: TypeLike, method: MethodNode, isInterface: Boolean = false): Handle {
-    return h_putstatic(owner, method.name, method.desc, isInterface)
+public fun InstructionAssembly.h_putstatic(owner: TypeLike, field: FieldNode, isInterface: Boolean = false): Handle {
+    return h_putstatic(owner, field.name, field.desc, isInterface)
 }
-public fun InstructionAssembly.h_getstatic(owner: TypeLike, method: MethodNode, isInterface: Boolean = false): Handle {
-    return h_getstatic(owner, method.name, method.desc, isInterface)
+public fun InstructionAssembly.h_getstatic(owner: TypeLike, field: FieldNode, isInterface: Boolean = false): Handle {
+    return h_getstatic(owner, field.name, field.desc, isInterface)
 }
 public fun InstructionAssembly.h_newinvokespecial(owner: TypeLike, method: MethodNode, isInterface: Boolean = false): Handle {
     return h_newinvokespecial(owner, method.name, method.desc, isInterface)
