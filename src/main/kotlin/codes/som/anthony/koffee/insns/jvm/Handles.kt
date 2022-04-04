@@ -51,6 +51,18 @@ public fun InstructionAssembly.h_invokeinterface(owner: TypeLike, name: String, 
 public fun InstructionAssembly.h_invokestatic(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike, isInterface: Boolean = false): Handle {
     return h_invokestatic(owner, name, constructMethodDescriptor(returnType, *parameterTypes), isInterface)
 }
+public fun InstructionAssembly.h_putfield(owner: TypeLike, name: String, type: TypeLike, isInterface: Boolean = false): Handle {
+    return h_putfield(owner, name, coerceType(type).descriptor, isInterface)
+}
+public fun InstructionAssembly.h_getfield(owner: TypeLike, name: String, type: TypeLike, isInterface: Boolean = false): Handle {
+    return h_getfield(owner, name, coerceType(type).descriptor, isInterface)
+}
+public fun InstructionAssembly.h_putstatic(owner: TypeLike, name: String, type: TypeLike, isInterface: Boolean = false): Handle {
+    return h_putstatic(owner, name, coerceType(type).descriptor, isInterface)
+}
+public fun InstructionAssembly.h_getstatic(owner: TypeLike, name: String, type: TypeLike, isInterface: Boolean = false): Handle {
+    return h_getstatic(owner, name, coerceType(type).descriptor, isInterface)
+}
 public fun InstructionAssembly.h_newinvokespecial(owner: TypeLike, name: String, returnType: TypeLike, vararg parameterTypes: TypeLike, isInterface: Boolean = false): Handle {
     return h_newinvokespecial(owner, name, constructMethodDescriptor(returnType, *parameterTypes), isInterface)
 }
