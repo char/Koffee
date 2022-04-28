@@ -1,9 +1,9 @@
-import codes.som.anthony.koffee.assembleClass
-import codes.som.anthony.koffee.insns.jvm._return
-import codes.som.anthony.koffee.insns.jvm.getstatic
-import codes.som.anthony.koffee.insns.jvm.invokevirtual
-import codes.som.anthony.koffee.insns.jvm.ldc
-import codes.som.anthony.koffee.modifiers.public
+import codes.som.koffee.assembleClass
+import codes.som.koffee.insns.jvm._return
+import codes.som.koffee.insns.jvm.getstatic
+import codes.som.koffee.insns.jvm.invokevirtual
+import codes.som.koffee.insns.jvm.ldc
+import codes.som.koffee.modifiers.public
 import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.ClassWriter.COMPUTE_FRAMES
 import java.io.PrintStream
