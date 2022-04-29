@@ -16,7 +16,7 @@ import codes.som.koffee.types.coerceType as coerceTypeStatic
  * It supports easy creation of new [method]s and [field]s.
  */
 public class ClassAssembly internal constructor(public val node: ClassNode): ModifiersAccess, TypesAccess {
-    internal constructor(access: Modifiers, name: String, version: Int, superName: String, interfaces: List<TypeLike>) : this(ClassNode(ASM7).also {
+    internal constructor(access: Modifiers, name: String, version: Int, superName: String, interfaces: List<TypeLike>) : this(ClassNode(ASM9).also {
         it.access = access.access
         it.name = name
         it.version = version
@@ -76,7 +76,7 @@ public class ClassAssembly internal constructor(public val node: ClassNode): Mod
      * instead of initialization during `<clinit>`.
      */
     public fun field(access: Modifiers, name: String, type: TypeLike, signature: String? = null, value: Any? = null): FieldNode {
-        val fieldNode = FieldNode(ASM7, access.access, name, coerceType(type).descriptor, signature, value)
+        val fieldNode = FieldNode(ASM9, access.access, name, coerceType(type).descriptor, signature, value)
         node.fields.add(fieldNode)
         return fieldNode
     }
@@ -93,7 +93,7 @@ public class ClassAssembly internal constructor(public val node: ClassNode): Mod
                       routine: MethodAssembly.() -> Unit): MethodNode {
         val descriptor = Type.getMethodDescriptor(coerceType(returnType), *parameterTypes.map(::coerceType).toTypedArray())
 
-        val methodNode = MethodNode(ASM7, access.access, name, descriptor, signature, exceptions?.map { coerceType(it).internalName }?.toTypedArray())
+        val methodNode = MethodNode(ASM9, access.access, name, descriptor, signature, exceptions?.map { coerceType(it).internalName }?.toTypedArray())
         val methodAssembly = MethodAssembly(methodNode)
         routine(methodAssembly)
 
@@ -106,7 +106,7 @@ public class ClassAssembly internal constructor(public val node: ClassNode): Mod
 /**
  * Assemble a class with the given information and creation block, and return the resulting [ClassNode].
  */
-public fun assembleClass(access: Modifiers, name: String, version: Int = V1_5, superName: String = "java/lang/Object", interfaces: List<TypeLike> = listOf(), routine: ClassAssembly.() -> Unit): ClassNode {
+public fun assembleClass(access: Modifiers, name: String, version: Int = V1_8, superName: String = "java/lang/Object", interfaces: List<TypeLike> = listOf(), routine: ClassAssembly.() -> Unit): ClassNode {
     val assembly = ClassAssembly(access, name, version, superName, interfaces)
     routine(assembly)
     return assembly.node
