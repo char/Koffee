@@ -15,17 +15,56 @@ and the preferred approach of a leading underscore before the reserved name.
 - Since 'return' is a globally reserved keyword in Kotlin, the instruction `return` can be referenced using
 `` `return` `` or `_return`
 
-## Example
+## Extras
+
+Kotlin makes life a lot easier for simplifying the user's experience. It allows Koffee to do some useful things:
+- All bytecode instructions are represented as simple methods (e.g. `getfield(...)`) or properties (e.g. `aconst_null`)
+- Fields are created with a single function call (e.g. `field(...)`)
+- Methods are created with an easy way to add individual bytecode (see the [example](#simple-example))
+- Lots of sugar exists for commonly used constructs:
+  - `init` and `clinit` methods
+  - Object creation (with `construct`)
+  - Try/catch blocks (with `guard` and its returned object to add exception handlers)
+
+## Simple Example
 
 ```kotlin
 val helloWorld: ClassNode = assembleClass(public, "com/example/HelloWorld") {
-    name = "com/example/HelloWorld"
-
     method(public + static, "main", void, Array<String>::class) {
         getstatic(System::class, "out", PrintStream::class)
         ldc("Hello, world!")
         invokevirtual(PrintStream::class, "println", void, String::class)
         _return
+    }
+}
+```
+
+## Complex Example
+
+```kotlin
+val myClass = assembleClass(public, "com/example/MyClass") {
+    field(public + static + final, "theAnswer", int, value = 42)
+    field(private + static + final, "instance", MyClass::class)
+
+    method(public + static, "getInstance", MyClass::class) {
+        getstatic(MyClass::class, "instance", MyClass::class)
+        dup
+        ifnull(L["oh noes"])
+        _return
+        +L["oh noes"]
+        construct(IOException::class, String::class) {
+            ldc("no instance exists whatever shall we do?")
+        }
+        athrow
+    }
+
+    init(public) {
+        // nothing extra: the superclass is called automatically, and no fields are initialized
+    }
+
+    clinit {
+        construct(MyClass::class)
+        putstatic(MyClass::class, "instance", MyClass::class)
     }
 }
 ```
