@@ -12,6 +12,13 @@ import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.LabelNode
 import org.objectweb.asm.tree.TryCatchBlockNode
 
+/**
+ * A wrapper for a try/catch block.
+ *
+ * @property startNode The beginning label of the try/catch block.
+ * @property endNode The end label of the try/catch block.
+ * @property exitNode The label to jump to outside the try/catch block.
+ */
 public class GuardAssembly<T>(private val assembly: T,
                               public val startNode: LabelNode, public val endNode: LabelNode, public val exitNode: LabelNode)
         where T : InstructionAssembly, T : TryCatchContainer, T : LabelScope {
@@ -22,6 +29,10 @@ public class GuardAssembly<T>(private val assembly: T,
         override val L: LabelRegistry = assembly.L.copy(assembly)
     }
 
+    /**
+     * Handle a given [exceptionType]. If [fallthrough] is true, this exception handler will fall through to the next,
+     * ignoring the exception. Otherwise, it will directly jump to [exitNode].
+     */
     public fun handle(exceptionType: TypeLike, fallthrough: Boolean = false, routine: GuardHandlerAssemblyContext<T>.() -> Unit): GuardAssembly<T> {
         val instructions = InsnList()
         val handlerNode = LabelNode()
@@ -40,6 +51,10 @@ public class GuardAssembly<T>(private val assembly: T,
     }
 }
 
+/**
+ * Sugar for a try/catch block. This returns a [GuardAssembly]
+ * which can be used specify which exceptions should be handled.
+ */
 public fun <T> T.guard(routine: T.() -> Unit): GuardAssembly<T> where T : InstructionAssembly, T : TryCatchContainer, T : LabelScope {
     val startNode = LabelNode()
     val endNode = LabelNode()

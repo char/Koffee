@@ -3,6 +3,10 @@ package codes.som.koffee.insns.sugar
 import codes.som.koffee.insns.InstructionAssembly
 import codes.som.koffee.insns.jvm.*
 
+/**
+ * Push an arbitrary integer constant onto the stack.
+ * It will use the appropriate instruction depending on the value.
+ */
 public fun InstructionAssembly.push_int(i: Int) {
     when (i) {
         -1 -> iconst_m1

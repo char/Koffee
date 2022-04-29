@@ -4,13 +4,17 @@ import codes.som.koffee.modifiers.Modifiers
 import codes.som.koffee.sugar.ModifiersAccess
 import codes.som.koffee.sugar.TypesAccess
 import codes.som.koffee.types.TypeLike
-import org.objectweb.asm.Opcodes.ASM7
+import org.objectweb.asm.Opcodes.*
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.ClassNode
 import org.objectweb.asm.tree.FieldNode
 import org.objectweb.asm.tree.MethodNode
 import codes.som.koffee.types.coerceType as coerceTypeStatic
 
+/**
+ * A higher-level representation of a class than ASM's [ClassNode].
+ * It supports easy creation of new [method]s and [field]s.
+ */
 public class ClassAssembly internal constructor(public val node: ClassNode): ModifiersAccess, TypesAccess {
     internal constructor(access: Modifiers, name: String, version: Int, superName: String, interfaces: List<TypeLike>) : this(ClassNode(ASM7).also {
         it.access = access.access
@@ -64,12 +68,18 @@ public class ClassAssembly internal constructor(public val node: ClassNode): Mod
     }
 }
 
-public fun assembleClass(access: Modifiers, name: String, version: Int = 49, superName: String = "java/lang/Object", interfaces: List<TypeLike> = listOf(), routine: ClassAssembly.() -> Unit): ClassNode {
+/**
+ * Assemble a class and return the resulting [ClassNode].
+ */
+public fun assembleClass(access: Modifiers, name: String, version: Int = V1_5, superName: String = "java/lang/Object", interfaces: List<TypeLike> = listOf(), routine: ClassAssembly.() -> Unit): ClassNode {
     val assembly = ClassAssembly(access, name, version, superName, interfaces)
     routine(assembly)
     return assembly.node
 }
 
+/**
+ * Get a [ClassAssembly] out of this ClassNode, and return the modified node.
+ */
 public fun ClassNode.koffee(routine: ClassAssembly.() -> Unit): ClassNode {
     val assembly = ClassAssembly(this)
     routine(assembly)
